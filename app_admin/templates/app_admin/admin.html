@@ -1,0 +1,112 @@
+{% extends 'baseA.html' %}
+{% block content %}
+{% include 'baseMenu.html' %}
+
+    <div class="main-content">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+                <div class="overview-wrap mb-3">
+                    <h2 class="title-3"><a href="{%url 'admins'%}"><- Les Admins</a></h2>
+                   
+                    
+                </div>
+            </div>
+        </div>
+
+            <div class="container" style="margin-bottom:3em;">
+                <div class="row justify-content-center">
+                  <div class="col-md-7">
+                    <div class="card mt-5 mb-5">
+                      <div class="card-body">
+                        
+                        {% if modif %}
+                        <h2 class="text-center mb-4">Modifier l'administrateur ({{utilisateur.username}}) </h2>
+                        {%else%}
+                        <h2 class="text-center mb-4">Ajouter un Administrateur</h2>
+                        {% endif %}
+                          
+                        
+                        <form method="POST">
+                            {% csrf_token %}
+            
+                         
+                          
+                          {% if not modif %}
+                          <div class="form-group">
+                            <label for="username">Nom d'utilisateur</label>
+                            <input type="text" class="form-control" id="username" name="username" value="{% if username %}{{username}}{%else%}{{utilisateur.username}}{% endif %}">
+                          </div>
+                          {% endif %}
+                            
+                          <div class="form-group">
+                            <label for="nom">Nom </label>
+                            <input type="text" class="form-control" id="nom" name="nom" value="{% if nom %}{{nom}}{%else%}{{utilisateur.last_name}}{% endif %}" >
+                          </div>
+                          <div class="form-group">
+                            <label for="prenom">Prenom </label>
+                            <input type="text" class="form-control" id="prenom" name="prenom" value="{% if prenom %}{{prenom}}{%else%}{{utilisateur.first_name}}{% endif %}">
+                          </div>
+
+                          <div class="form-group">
+                            <label for="email">email</label>
+                            <input type="eamil" class="form-control" id="email" name="email" value="{% if email %}{{email}}{%else%}{{utilisateur.email}}{% endif %}" >
+                          </div>
+
+                          <div class="form-group">
+                            <label for="equipe">Statut équipe</label>
+                            <input type="checkbox" class="ml-2 form-check-input" id="equipe" name="equipe" {% if equipe or utilisateur.is_staff %}checked{% endif %}>
+                        </div>
+                         
+                          <div class="form-group"><br>
+                            
+                            {% if modif %}
+                            <label for="password">Nouveau Mot de passe</label><br>
+                            {% else %}
+                            <label for="password">Mot de passe</label><br>
+                            {% endif %}
+                              
+                            <input type="password" class="form-control" name="password" id="password" >
+                          </div>
+
+                          <div class="form-group"><br>
+                            <label for="password1">Confirmez le mot de passe</label><br>
+                            <input type="password" class="form-control" name="password1" id="password1" >
+                          </div>
+                          
+                          {% if modif %}
+                          <input type="submit" class="btn w-100"  style="background-color:#337ab7; color: #fff;" value="Modifier" >
+                          {% else %}
+                          <input type="submit" class="btn w-100"  style="background-color:#337ab7; color: #fff;" value="Ajouter" >
+                          {%endif%}
+                            
+                         
+                          
+                          {% if messages %}
+            <div class="m-9 alert alert-danger alert-dismissible fade show" role="alert">
+                <ul>
+                {% for message in messages %}
+                <li class="text-center"> {% if message.tags %} {{ message }}  {% endif %}</li>
+                {% endfor %}
+                </ul>
+                <button type="button" class="close" data-dismiss="alert"> <span>&times;</span> </button>
+            
+            </div>
+            
+            
+            {% endif %}
+            
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+            
+        </div>
+    </div>
+</div>
+{% endblock content %}

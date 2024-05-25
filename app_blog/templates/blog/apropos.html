@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<main class="container-fluid m-b-100">
+
+    <h1 class="text-center m-t-10">Nos vision, mission et valeurs</h1>
+
+    <!-- Vision -->
+    <div class="container col-12 items-center mt-5">
+        <div class="relative z-1 col-start-1 col-span-12 md:col-span-6 lg:col-span-4 | lg:col-start-2">
+            <h2><span class="text-primary">Vision</span></h2>
+            <p>
+                Nous construisons un monde durable où les femmes et les hommes vivent dans un État de droit et ont la liberté de s’épanouir pleinement.
+            </p>
+            <p>
+                Nous sommes un acteur européen qui renforce l’impact de la Belgique sur le développement international.
+            </p>
+            <p>
+                En tant que centre de connaissances, nous pensons et agissons en termes d’influence stratégique/politique en faveur du développement.
+            </p>
+            <p>
+                Nos expertises sont en réseau de manière agile et réactive, et réalisent des actions de développement durable, en ligne avec les priorités belges et les objectifs des pays partenaires.
+            </p>
+        </div>
+        <div class="relative col-span-12 md:col-span-6 lg:col-span-4 lg:mx-12" data-aos="fade-right">
+            <img src="{% static 'en1.jpg' %}" alt="Vision" class="img-fluid">
+        </div>
+    </div>
+
+    <!-- Mission -->
+    <div class="container col-12 items-center mt-5">
+        <div class="relative z-1 col-start-1 col-span-12 md:col-span-6 lg:col-span-4 | lg:col-start-2">
+            <h2><span class="text-primary">Mission</span></h2>
+            <p>
+                Enabel est l’agence de développement du gouvernement fédéral belge ; nous mettons en œuvre la politique belge en matière de développement international.
+
+                Nous accomplissons toute mission de service public qui s’inscrit dans le cadre de l’Agenda 2030 pour le développement durable, en Belgique et à l’étranger.
+
+                Nous offrons l’expertise la plus adaptée, dont l’expertise publique belge, favorisons l’interaction entre tous les acteurs et concluons les meilleurs partenariats possible.
+
+                Enabel renforce l’impact de la Belgique en matière de développement international en exécutant des missions pour des mandants tiers, tant nationaux qu’internationaux.
+            </p>
+        </div>
+        <div class="relative col-span-12 md:col-span-6 lg:col-span-4 lg:mx-12" data-aos="fade-right">
+            <img src="{% static 'EN2.jpg' %}" alt="Mission" class="img-fluid">
+        </div>
+    </div>
+
+    <!-- Valeurs -->
+    <div class="container col-12 items-center mt-5">
+        <div class="relative z-1 col-start-1 col-span-12 md:col-span-6 lg:col-span-4 | lg:col-start-2">
+            <h2><span class="text-primary">Valeurs</span></h2>
+            <p><b>Engagement :</b> Nous faisons preuve d’engagement et de détermination dans la réalisation de nos tâches individuelles, tout comme dans notre contribution à la réalisation des tâches de notre organisation.</p>
+            <p><b>Respect :</b> Nous reconnaissons l’identité et la dignité de chaque individu, apprécions la diversité à sa juste valeur et respectons le savoir-faire, le travail et les idées de nos partenaires, donneurs d’ordre et collègues.</p>
+            <p><b>Sens des responsabilités :</b> Nous avons pleinement conscience de notre responsabilité sociétale et entendons contribuer à l’élimination de la pauvreté et à la construction d’un monde équitable.</p>
+            <p><b>Intégrité :</b> Dans tout ce que nous faisons, à tous les niveaux et sans aucun avantage personnel, nous faisons preuve de dignité, de fiabilité, de sincérité et d’honnêteté.</p>
+        </div>
+        <div class="relative col-span-12 md:col-span-6 lg:col-span-4 lg:mx-12" data-aos="fade-right">
+            <img src="{% static 'en3.jpg' %}" alt="Valeurs" class="img-fluid">
+        </div>
+    </div>
+
+</main>
+
+{% endblock %}

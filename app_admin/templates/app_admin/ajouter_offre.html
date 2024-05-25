@@ -1,0 +1,92 @@
+{% extends 'baseA.html' %}
+{% block content %}
+{% include 'baseMenu.html' %}
+
+    <div class="main-content">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+
+          <div class="row">
+            <div class="col-md-12">
+                <div class="overview-wrap mb-3">
+                    <h2 class="title-3"><a href="{%url 'offres'%}"><- Marchés publics </a></h2>
+                   
+                    
+                </div>
+            </div>
+        </div>
+
+            <div class="container" style="margin-bottom:3em;">
+                <div class="row justify-content-center">
+                  <div class="col-md-7">
+                    <div class="card mt-5 mb-5">
+                      <div class="card-body">
+                        <h2 class="text-center mb-4">Publier un marché public</h2>
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+            
+                          <div class="form-group">
+                            <label for="code">Numero du marché public</label>
+                            <input type="text" class="form-control" id="code" name="code" value="{% if code %}{{ code }}{% endif %}" required>
+                          </div>
+                          <div class="form-group">
+                            <label for="description">description</label>
+                            <textarea rows="7" style="resize: none;" class="form-control" id="description" name="description">{% if offre.description %}{{ offre.description }}{% endif %}</textarea>
+                          </div>
+                          <div class="form-group">
+                            <label for="pays">pays</label>
+                            <input type="text" class="form-control" id="pays" name="pays" value="{% if pays %}{{ pays }}{% endif %}">
+                          </div>
+                          <div class="form-group">
+                            <label for="date_limite">date limite</label>
+                            <input type="date" class="form-control" id="date_limite" name="date_limite" value="{% if date_limite %}{{ date_limite}}{% endif %}" required>
+                          </div>
+                          <div class="form-group">
+                            <label for="heure_limite">heure</label>
+                            <input type="time" class="form-control" id="heure_limite" name="heure_limite" value="{% if heure_limite %}{{ heure_limite}}{% endif %}" required>
+                          </div>
+                          <!--<div class="form-group">
+                            <label for="heure">heure</label>
+                            <input type="time" class="form-control" id="heure" name="heure" value="{% if heure %}{{heure}}{% endif %}" required>
+                          </div>-->
+                          <div class="form-group"><br>
+                            <label for="doc">Publier vos fichiers ici </label><br><br>
+                            <input type="file" class="form-control" name="doc1" id="doc1" value="{% if doc1 %}{{doc1}}{% endif %}"><br>
+                            <input type="file" class="form-control" name="doc2" id="doc2" value="{% if doc2 %}{{doc2}}{% endif %}"><br>
+                            <input type="file" class="form-control" name="doc3" id="doc3" value="{% if doc3 %}{{doc3}}{% endif %}"><br>
+                            <input type="file" class="form-control" name="doc4" id="doc4" value="{% if doc4 %}{{doc4}}{% endif %}"><br>
+                            <input type="file" class="form-control" name="doc5" id="doc5" value="{% if doc5 %}{{doc5}}{% endif %}"><br>
+                       
+                          </div>
+                          
+                        
+                          <input type="submit" class="btn btn-custom w-100 "   style="background-color:#337ab7; color: #fff;" value="Publier" >
+                       
+                          
+                          {% if messages %}
+            <div class="m-9 alert alert-danger alert-dismissible fade show" role="alert">
+                <ul>
+                {% for message in messages %}
+                <li class="text-center"> {% if message.tags %} {{ message }}  {% endif %}</li>
+                {% endfor %}
+                </ul>
+                <button type="button" class="close" data-dismiss="alert"> <span>&times;</span> </button>
+            
+            </div>
+            
+            
+            {% endif %}
+            
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+         
+            
+        </div>
+    </div>
+</div>
+{% endblock content %}

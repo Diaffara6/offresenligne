@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<p> Code du marché : {{ offre.code }} </p>
+<p> Pays : {{ offre.pays }} </p>
+<p> Description : {{ offre.description }} </p>
+{% if offre.status is True %}
+<b>Offre Disponible </b>
+{% else %}
+<b>Offre Indisponible </b>
+{% endif %}
+<p> Date de publication : {{ offre.date_pub }} </p>
+<p> Date Limite {{ offre.date_limite }} </p>
+
+
+{% endblock %}
+    

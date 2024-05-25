@@ -1,0 +1,92 @@
+{% extends 'baseA.html' %}
+{% block content %}
+{% include 'baseMenu.html' %}
+
+    <div class="main-content">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+
+
+          <div class="row">
+            <div class="col-md-12">
+                <div class="overview-wrap mb-3">
+                    <h2 class="title-3"><a href="{%url 'offres'%}"><- Marchés publics </a></h2>
+                    
+                </div>
+            </div>
+        </div>
+            <div class="container" style="margin-bottom:3em;">
+                <div class="row justify-content-center">
+                  <div class="col-md-7">
+                    <div class="card mt-5 mb-5">
+                      <div class="card-body">
+                        <h2 class="text-center mb-4">Modification du marché public ({{offre.code}})</h2>
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+            
+                          
+                            <div class="form-group">
+                              <label for="description">description</label>
+                              <textarea rows="7" style="resize: none;" class="form-control" id="description" name="description">{% if offre.description %}{{ offre.description }}{% endif %}</textarea>
+                            </div>
+                          <div class="form-group">
+                            <label for="pays">pays</label>
+                            <input type="text" class="form-control" id="pays" name="pays" value="{% if offre.pays %}{{offre.pays}}{% endif %}" >
+                          </div>
+                          <div class="form-group">
+                            <label for="date_limite">{% if offre.date_limite %}Date limite actuelle :<br>   {{ offre.date_limite  }} {% endif %} <br>
+                            </label><br>
+                            <input type="date" class="form-control" id="date_limite" name="date_limite"  >
+                          </div>
+                         
+                          <div class="form-group">
+                            <label for="heure_limite"> {% if offre.heure_limite %}Heure actuelle :<br>   {{ offre.heure_limite  }} {% endif %} <br>
+                            </label>
+                            <input type="time" class="form-control" id="heure_limite" name="heure_limite"  >
+                          </div>
+                          <div class="form-group"><br>
+                            <label for="doc1">vos fichiers sont lá</label><br><br>
+                            
+                            {% if offre.doc1 %}Actuellement : <a href="{{ offre.doc1.url }}">  {{ offre.doc1  }}</a> {% endif %} <br>
+                            <input type="file" class="form-control" name="doc1" id="doc1" ><br>
+                            {% if offre.doc2 %}Actuellement : <a href="{{ offre.doc2.url }}">  {{ offre.doc2  }}</a> {% endif %} <br>
+                            <input type="file" class="form-control" name="doc2" id="doc2" ><br>
+                            {% if offre.doc3 %}Actuellement : <a href="{{ offre.doc3.url }}">  {{ offre.doc3  }}</a> {% endif %} <br>
+                            <input type="file" class="form-control" name="doc3" id="doc3" ><br>
+                            {% if offre.doc4 %}Actuellement : <a href="{{ offre.doc4.url }}">  {{ offre.doc4  }}</a> {% endif %} <br>
+                            <input type="file" class="form-control" name="doc4" id="doc4" ><br>
+                            {% if offre.doc5 %}Actuellement : <a href="{{ offre.doc5.url }}">  {{ offre.doc5  }}</a> {% endif %} <br>
+                            <input type="file" class="form-control" name="doc5" id="doc5" ><br>
+                       
+                           </div>
+                          <input type="submit" class="btn btn-custom w-100 "  style="background-color:#337ab7; color:#fff;" value="Modifier" >
+                         
+                       
+                          
+                          {% if messages %}
+            <div class="m-9 alert alert-danger alert-dismissible fade show" role="alert">
+                <ul>
+                {% for message in messages %}
+                <li class="text-center"> {% if message.tags %} {{ message }}  {% endif %}</li>
+                {% endfor %}
+                </ul>
+                <button type="button" class="close" data-dismiss="alert"> <span>&times;</span> </button>
+            
+            </div>
+            
+            
+            {% endif %}
+            
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+         
+            
+        </div>
+    </div>
+</div>
+{% endblock content %}

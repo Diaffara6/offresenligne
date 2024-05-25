@@ -1,0 +1,53 @@
+ {% extends 'base.html' %}
+
+
+ {% block content %}
+
+
+
+{% if message %}
+<div style="margin-bottom:32em; align: center;margin-top:7em; ">
+    <h1 class="text-center m-5"> {{message}} <a href="{% url 'connexion'%}">connexion</a></h1>
+</div>
+   {% else %}
+
+   <div class="container" style="margin-bottom:6em; margin-top:7em;">
+    {% if messages %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <div style="list-style-type: none;"> <!-- Enlever les puces -->
+            {% for message in messages %}
+                <div class="text-center">{% if message.tags %}{{ message }}{% endif %}</div>
+            {% endfor %}
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    
+   {% endif %}
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="form-group"><br>
+            <label for="proposition">Téléversez votre/vos documents ici :</label><br><br>
+            <label for="proposition">Mettez votre offre technique et administrative ici :</label><br>
+            <input type="file" class="form-control" name="proposition1" id="proposition1"><br>
+            <label for="proposition">Mettez votre offre financière ici :</label><br>
+            <input type="file" class="form-control" name="proposition2" id="proposition2"><br>
+            <label for="proposition">Autres documents:</label><br>
+            <input type="file" class="form-control" name="proposition3" id="proposition3"><br>
+            <input type="file" class="form-control" name="proposition4" id="proposition4"><br>
+            <input type="file" class="form-control" name="proposition5" id="proposition5"><br>
+          </div>
+          <button type="submit" class="btn " style="background-color: #337ab7; color:#fff;" onclick="return confirm('Attention : Lorsque vous postulez , assurez-vous de soumettre les bons documents dès le depart , une fois envoyés, vous ne pourrez pas les modifiés ou les renvoyés. Soyez attentifs et prévoyants dans vos démarches.')">JE POSTULE</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+{% endif %}
+
+
+
+
+
+ {% endblock %}

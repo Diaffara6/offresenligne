@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center align-items-center" style="min-height: 100vh;">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4">
+            <div class="card p-3">
+                <h3 class="mb-3 text-center">Connexion</h3>
+                <img src="{% static 'logo1.png' %}" width="130px" class="img-fluid mx-auto d-block" alt="Enabel Burkina">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Adresse email</label>
+                        <input type="text" class="form-control" id="email" name="email" value="{% if email %}{{email}}{% endif %}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Mot de passe</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <input type="submit" class="btn w-100 text-light mb-2" style="background-color: #337ab7;"  value="Connexion">
+                    {% if messages %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <div style="list-style-type: none;"> <!-- Enlever les puces -->
+                            {% for message in messages %}
+                                <div class="text-center">{% if message.tags %}{{ message }}{% endif %}</div>
+                            {% endfor %}
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    
+                {% endif %}
+                    <p class="text-center">Pas de compte ? <a href="{% url 'inscription' %}">Inscription</a></p>
+                    <p class="text-center"><a href="{% url 'reset_password' %}">Mot de passe oublié</a></p>
+                   
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

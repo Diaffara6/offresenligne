@@ -1,0 +1,189 @@
+{% extends 'baseA.html' %}
+{% load static %}
+
+
+{% block content %}
+
+{% include 'baseMenu.html' %}
+
+<style type="text/css">
+    /* Styles personnalisés pour les grilles */
+.custom-grid {
+    margin-bottom: 30px; /* Espace entre les rangées */
+}
+
+/* Personnalisation des colonnes */
+.custom-grid .col-md-6,
+.custom-grid .col-lg-3 {
+    padding: 15px; /* Espace interne des colonnes */
+}
+
+/* Ajout de bordures et de styles de survol pour les cartes */
+.custom-grid .overview-item {
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+    transition: border-color 0.3s, transform 0.3s;
+}
+
+.custom-grid .overview-item:hover {
+    border-color: #007bff;
+    transform: scale(1.02);
+}
+
+</style>
+
+        <!-- MAIN CONTENT-->
+        <div class="main-content">
+            <div class="section__content section__content--p30">
+                <div class="container-fluid">
+                  
+                    <div class="row custom-grid">
+                        <div class="col-sm-6 col-lg-3 col-md-6">
+                            <!-- le lien pour les candidatures-->
+                          <a href="{%url 'candidatures' %}">
+                            <div class="overview-item overview-item--c1">
+                                <div class="overview__inner">
+                                    <div class="overview-box clearfix">
+                                        <div class="icon">
+                                            <i class=""></i>
+                                        </div>
+                                        <div class="text">
+                                            <h2>{{ les_candidatures.count}}</h2>
+                                            <span>Les Offres</span>
+                                        </div>
+                                    </div>
+                                    <div class="overview-chart">
+                                        <canvas id=""></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                          </a>
+                        </div>
+                        <div class="col-sm-6 col-lg-3 col-md-6">
+                             <!-- le lien pour les Employeurs-->
+                             <a href="{%url 'employeurs'%}">
+                                <div class="overview-item overview-item--c2">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class=""></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2>{{les_employeurs.count}} </h2>
+                                                <span>Les Employés</span>
+                                            </div>
+                                        </div>
+                                        <div class="overview-chart">
+                                            <canvas id=""></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-sm-6 col-lg-3 col-md-6">
+                             <!-- le lien pour les Entreprises-->
+                             <a href="{%url 'entreprises' %}">
+                                <div class="overview-item overview-item--c3">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class=""></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2>{{les_entreprises.count}}</h2>
+                                                <span>Les Entreprises</span>
+                                            </div>
+                                        </div>
+                                        <div class="overview-chart">
+                                            <canvas id=""></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                             </a>
+                        </div>
+                        <div class="col-sm-6 col-lg-3 col-md-6">
+                             <!-- le lien pour les Offres-->
+                             <a href="{%url 'offres' %}">
+                                <div class="overview-item overview-item--c4">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class=""></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2>{{les_offres.count}}</h2>
+                                                <span>Les Marchés</span>
+                                            </div>
+                                        </div>
+                                        <div class="overview-chart">
+                                            <canvas id=""></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    
+                   
+
+
+                    <!-- Quelques Entreprises -->
+                    <h1 class="text-center text-light pt-3 pb-3" style="background-color: #337ab7; color:#fff;">Quelques Entreprises </h1>
+                    
+                    <div class="row m-t-30">
+                        <div class="col-md-12">
+                            <!-- DATA TABLE-->
+                            <div class="table-responsive m-b-40">
+                                <table class="table table-bordered table-data3">
+                                    <thead>
+                                        <tr>
+                                        <th>Utilisateurs</th>
+                                        <th>Entreprises</th>
+                                        <th>Email(s)</th>
+                                        <th>Telephone(s)</th>
+                                        <th>Immatriculation</th>
+                                        <th>Activités</th>
+                                       
+                                        <th>Emails</th>
+                                        <th>Adresses</th>
+                                        <th>Date D'ajout</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-dark">
+                                        {% for entreprise in entreprises %}
+                                        <tr>
+                                            <td>{{ entreprise.utilisateur.first_name }} {{ entreprise.utilisateur.last_name }}</td>
+                                            <td>{{ entreprise.nom_entrep }}</td>
+                                            <td>{{ entreprise.email_entrep }}</td>
+                                            <td>{{ entreprise.idtel }} {{ entreprise.telephone }}</td>
+
+                                            <td>{% if entreprise.immatriculation %}{{ entreprise.immatriculation }} {% else %} vide {% endif %}</td>
+                                            <td>{{ entreprise.activite }}</td>
+                                            <td>{{ entreprise.email_entrep }}</td>
+                                            <td>{{ entreprise.adresse_entrep }}</td>
+                                            <td>{{ entreprise.date }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                
+                            </table>
+                        </div>
+                        <!-- END DATA TABLE-->
+                    
+
+
+
+                  
+                </div>
+            </div>
+        </div>
+        <!-- END MAIN CONTENT-->
+        <!-- END PAGE CONTAINER-->
+    </div>
+
+
+
+
+
+{% endblock %}
+    

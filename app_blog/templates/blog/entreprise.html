@@ -1,0 +1,201 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+
+    <div class="container" style="margin-bottom:2em; margin-top:5em;">
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <div class="card mt-5 mb-5">
+              <div class="card-body">
+                <h2 class="text-center mb-4">Votre entreprise</h2>
+                <form method="POST" >
+                    {% csrf_token %}
+
+                  <div class="form-group">
+                    <label for="nom_entrep">Nom de l'entreprise</label>
+                    <input type="text" class="form-control" id="nom_entrep" name="nom_entrep" value="{% if nom_entrep %}{{nom_entrep}}{% endif %}" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="adresse_entrep">Adresse de l'entreprise</label>
+                    <input type="text" class="form-control" id="adresse_entrep" name="adresse_entrep" value="{% if adresse_entrep %}{{adresse_entrep}}{% endif %}" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="email"> Email de l'entreprise</label>
+                    <input type="email" class="form-control" id="email" name="email" value="{% if email %}{{email}}{% endif %}" required>
+                  </div>
+                  <div class="form-group">
+                    
+                    <label for="activite">Secteur d'activité de l'entreprise</label>
+                        <select id="secteur" name="secteur" class="mb-3 col-5">
+                            <option value=""></option>
+                            <option value="Fournitures (Consommables, Matériels et Équipements Informatiques)">Fournitures informatiques</option>
+                            <option value="Réseaux Informatiques">Réseaux informatiques</option>
+                            <option value="Applications Web">Applications web</option>
+                            <option value="BTP (Bâtiments, Ouvrages Hydrauliques, Aménagement Hydro-agricole, Routes et Pistes)">BTP bâtiments, ouvrages hydrauliques ...</option>
+                            <option value="Prestations Intellectuelles">Prestations intellectuelles</option>
+                            <option value="Études de Préfaisabilité, APS, APD, Spécifications Techniques et Contrôles des Travaux">Études de préfaisabilité, APS, APD, spécifications techniques et contrôles des travaux</option>
+                            <option value="Fournitures EPI (Équipements de Protection Individuelle), Assainissement Public">Fournitures EPI équipements de protection individuelle, assainissement public</option>
+                            <option value="Fournitures (Consommables, Matériels et Équipements Agricoles, Matériels de Couture)">Fournitures informatique : consommables, matériels et équipements agricoles</option>
+                            <option value="Fournitures (Matériels Électriques et Électroménagers)">Fournitures matériels électriques et électroménagers</option>
+                            <option value="Fournitures (Consommables et Matériels de Papeterie)"> Fournitures consommables et matériels de papeterie </option>
+                            <option value="Produits d’Entretien et d’Hygièn e">Produits d’entretien et d’hygiène</option>
+                            <option value="Services Juridiques, Contrôle et Audit">Services juridiques, contrôle et audit</option>
+                            <option value="Services de Manutention et Transitaires">Services de manutention et transitaire</option>
+                            <option value="Location et Transport">Location et transport</option>
+                            <option value="Services Hôteliers et Traiteur">Services hôteliers et traiteur</option>
+                            <option value="Mobilier de Bureau">Mobilier de bureau</option>
+                            <option value="Quincaillerie">Quincaillerie</option>
+                            <option value="Mécanique (Moto et Auto)">Mécanique moto et auto</option>
+                            <option value="autre">Autre</option>
+                     </select>
+                    <input type="text" placeholder='ecrivez votre activité ici' class="form-control" id="activite" name="activite" value="{% if activite %}{{activite}}{% endif %}">
+                  </div>
+                     
+                     <!-- numero -->
+                     <div class="form-group">
+                      <label for="telephone">Votre numéro de téléphone</label>
+                      <div class="row">
+                          <div class="col-3 pr-0">
+                              <select id="idtel" name="idtel" class="form-control" required>
+                                  <option value="">ID</option>
+                                  <option value="+1">États-Unis (+1)</option>
+                                  <option value="+33">France (+33)</option>
+                                  <option value="+1">Canada (+1)</option>
+                                  <option value="+44">Royaume-Uni (+44)</option>
+                                  <option value="+49">Allemagne (+49)</option>
+                                  <option value="+81">Japon (+81)</option>
+                                  <option value="+61">Australie (+61)</option>
+                                  <option value="+55">Brésil (+55)</option>
+                                  <option value="+91">Inde (+91)</option>
+                                  <option value="+27">Afrique du Sud (+27)</option>
+                                  <option value="+34">Espagne (+34)</option>
+                                  <option value="+39">Italie (+39)</option>
+                                  <option value="+30">Grèce (+30)</option>
+                                  <option value="+31">Pays-Bas (+31)</option>
+                                  <option value="+32">Belgique (+32)</option>
+                                  <option value="+351">Portugal (+351)</option>
+                                  <option value="+46">Suède (+46)</option>
+                                  <option value="+358">Finlande (+358)</option>
+                                  <option value="+47">Norvège (+47)</option>
+                                  <option value="+45">Danemark (+45)</option>
+                                  <option value="+213">Algérie (+213)</option>
+                                  <option value="+244">Angola (+244)</option>
+                                  <option value="+229">Bénin (+229)</option>
+                                  <option value="+267">Botswana (+267)</option>
+                                  <option value="+226">Burkina Faso (+226)</option>
+                                  <option value="+257">Burundi (+257)</option>
+                                  <option value="+237">Cameroun (+237)</option>
+                                  <option value="+238">Cap-Vert (+238)</option>
+                                  <option value="+236">République centrafricaine (+236)</option>
+                                  <option value="+269">Comores (+269)</option>
+                                  <option value="+242">Congo-Brazzaville (+242)</option>
+                                  <option value="+243">République démocratique du Congo (+243)</option>
+                                  <option value="+225">Côte d'Ivoire (+225)</option>
+                                  <option value="+253">Djibouti (+253)</option>
+                                  <option value="+20">Égypte (+20)</option>
+                                  <option value="+291">Érythrée (+291)</option>
+                                  <option value="+251">Éthiopie (+251)</option>
+                                  <option value="+241">Gabon (+241)</option>
+                                  <option value="+220">Gambie (+220)</option>
+                                  <option value="+233">Ghana (+233)</option>
+                                  <option value="+224">Guinée (+224)</option>
+                                  <option value="+245">Guinée-Bissau (+245)</option>
+                                  <option value="+254">Kenya (+254)</option>
+                                  <option value="+266">Lesotho (+266)</option>
+                                  <option value="+231">Libéria (+231)</option>
+                                  <option value="+218">Libye (+218)</option>
+                                  <option value="+261">Madagascar (+261)</option>
+                                  <option value="+265">Malawi (+265)</option>
+                                  <option value="+223">Mali (+223)</option>
+                                  <option value="+222">Mauritanie (+222)</option>
+                                  <option value="+230">Maurice (+230)</option>
+                                  <option value="+262">Mayotte (+262)</option>
+                                  <option value="+212">Maroc (+212)</option>
+                                  <option value="+258">Mozambique (+258)</option>
+                                  <option value="+264">Namibie (+264)</option>
+                                  <option value="+227">Niger (+227)</option>
+                                  <option value="+234">Nigéria (+234)</option>
+                                  <option value="+262">Réunion (+262)</option>
+                                  <option value="+250">Rwanda (+250)</option>
+                                  <option value="+290">Sainte-Hélène (+290)</option>
+                                  <option value="+239">Sao Tomé et Principe (+239)</option>
+                                  <option value="+221">Sénégal (+221)</option>
+                                  <option value="+248">Seychelles (+248)</option>
+                                  <option value="+232">Sierra Leone (+232)</option>
+                                  <option value="+252">Somalie (+252)</option>
+                                  <option value="+211">Soudan du Sud (+211)</option>
+                                  <option value="+249">Soudan (+249)</option>
+                                  <option value="+268">Eswatini (+268)</option>
+                                  <option value="+255">Tanzanie (+255)</option>
+                                  <option value="+228">Togo (+228)</option>
+                                  <option value="+216">Tunisie (+216)</option>
+                                  <option value="+256">Ouganda (+256)</option>
+                                  <option value="+212">Sahara occidental (+212)</option>
+                                  <option value="+260">Zambie (+260)</option>
+                                  <option value="+263">Zimbabwe (+263)</option>
+
+                              </select>
+                          </div>
+                          <div class="col-9 pl-1">
+                              <input type="number" class="form-control" id="telephone" name="telephone" value="{% if telephone %}{{telephone}}{% endif %}" required>
+                          </div>
+                      </div>
+                  </div>
+
+
+                     <!-- numero -->
+
+                  <div class="form-group">
+                    <label for="immatriculation">Numéro d'immatriculation (RCCM) </label>
+                    <input type="text" class="form-control" id="immatriculation" name="immatriculation" placeholder="optionnel" value="{% if immatriculation %}{{immatriculation}}{% endif %}" >
+                  </div><br>
+
+                  <input type="submit" class="btn btn-custom w-100"  style="background-color: #337ab7; color:#fff;" value="Enregistrer" >
+
+                  {% if messages %}
+                    <div class="alert alert-danger  alert-dismissible fade show" role="alert">
+                        <div style="list-style-type: none;"> <!-- Enlever les puces -->
+                            {% for message in messages %}
+                                <div class="text-center">{% if message.tags %}{{ message }}{% endif %}</div>
+                            {% endfor %}
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+
+                    {% endif %}
+
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const secteurSelect = document.getElementById('secteur');
+            const activiteInput = document.getElementById('activite');
+        
+            function toggleActiviteVisibility() {
+                if (secteurSelect.value === 'autre') {
+                     activiteInput.style.display = '';
+                     activiteInput.setAttribute('required', 'required');
+                } else {
+                  secteurSelect.setAttribute('required', 'required');
+                  activiteInput.style.display = 'none';
+                  activiteInput.removeAttribute('required');
+                }
+            }
+
+            secteurSelect.addEventListener('change', toggleActiviteVisibility);
+            toggleActiviteVisibility(); // Appel initial pour définir la visibilité correcte au chargement de la page
+        });
+    </script>
+
+
+
+{% endblock %}

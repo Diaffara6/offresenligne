@@ -1,0 +1,147 @@
+{% extends 'baseA.html' %}
+{% block content %}
+{% include 'baseMenu.html' %}
+
+<div class="main-content">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+            {% if messages %}
+            <div class="m-9 alert alert-success alert-dismissible fade show" role="alert">
+                <ul>
+                {% for message in messages %}
+                <li class="text-center"> {% if message.tags %} {{ message }}  {% endif %}</li>
+                {% endfor %}
+                </ul>
+                <button type="button" class="close" data-dismiss="alert"> <span>&times;</span> </button>
+            
+            </div>
+             {% endif %}
+             <div class="row">
+                <div class="col-md-12">
+                    <div class="overview-wrap mb-3">
+                        <h2 class="title-3"><a href="{% url 'accueil'%}"><- Accueil </a></h2>
+                        <a href="{%url 'ajouter_admin'%}"> 
+                        <button class="au-btn au-btn-icon au-btn--blue">
+                            <i class="zmdi zmdi-plus"></i>Ajouter un Administrateur</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="text-center text-light pt-3 pb-3 " style="background-color: #337ab7; color:#fff;">Les Administrateurs </h2>
+         
+
+            <div class="row m-t-30">
+                <div class="col-md-12">
+                    <!-- DATA TABLE-->
+                    <div class="table-responsive m-b-40">
+                        <table class="table table-bordered table-data3">
+                            <thead>
+                                <tr>
+                                <th>Utilisateurs</th>
+                                <th>nom complet</th>
+                                <th>email</th>
+                                <th>status</th>
+                                <th>Mot de passes</th>
+                                <th>Dates D'ajout</th>
+                                <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-dark">
+                                {% for admin in admins %}
+                                <tr>
+                                    <td>{{ admin.username }}</td>
+                                    <td>{{ admin.last_name }} {{ admin.first_name }}</td>
+                                    <td>{{ admin.email }}</td>
+
+                                    {% if admin.is_staff %}
+                                        <td>Super Admin</td>
+                                    {% else %}
+                                        <td>Admin</td>
+                                    {% endif %}
+                                    <td>******</td>
+                                   <td>{{ admin.date_joined }}</td>
+                                    <td>
+                                        <div class="table-data-feature">
+                                            
+                                            <a class="mr-1" href="{%url 'modifier_admin' admin.pk %}"><button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editer">
+                                              <i class="zmdi zmdi-edit"></i> 
+                                            </button></a>
+                                            {%if admin.is_active %}
+                                            <a href="{%url 'delete_admin' admin.pk %}"> <button onclick="return confirm('voulez-vous desactiver le compte de cet administrateur ? ')" class="item" data-toggle="tooltip" id="delete" data-placement="top" title="" data-original-title="Desactivé">
+                                                  <i class="zmdi zmdi-eye-off"></i>
+                                            </button></a>
+                                            {%else%}
+                                            <a href="{%url 'active_admin' admin.pk %}"> <button onclick="return confirm('voulez-vous activer le compte de cet administrateur ? ')" class="item" data-toggle="tooltip"   data-placement="top" title="" data-original-title="Activé">
+                                                <i class="zmdi zmdi-account-add"></i>
+                                          </button></a>
+                                            {%endif%}
+                                        
+                                        </div>
+                                    </td>
+                                    
+                                </tr>
+                                {%empty%}
+                                <h2 class="text-center"> Aucun Administrateur n'a été ajouté pour le moment </h2>
+                                <br>
+                                {% endfor %}
+                            </tbody>
+                        
+                    </table>
+
+
+                </div>
+                <!-- END DATA TABLE-->
+                <div class='mb-0'>
+                    {% if admins.has_previous or admins.has_next %}
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item mx-1">
+                            {% if admins.has_previous %}
+                                <a class="page-link px-3 py-2 border border-primary rounded-full text-primary" href="?page={{ admins.previous_page_number }}">
+                                    &lt;
+                                </a>
+                            {% else %}
+                                <span class="page-link disabled px-3 py-2 border border-secondary rounded-full cursor-not-allowed">
+                                    &lt;
+                                </span>
+                            {% endif %}
+                        </li>
+                
+                        {% for num_page in admins.paginator.page_range %}
+                            <li class="page-item mx-1">
+                                {% if admins.number == num_page %}
+                                    <a class="page-link active bg-primary text-white px-3 py-2 rounded-full" href="?page={{ num_page }}">
+                                        {{ num_page }}
+                                    </a>
+                                {% else %}
+                                    <a class="page-link border border-primary rounded-full text-primary" href="?page={{ num_page }}">
+                                        {{ num_page }}
+                                    </a>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                
+                        <li class="page-item mx-1">
+                            {% if admins.has_next %}
+                                <a class="page-link px-3 py-2 border border-primary rounded-full text-primary" href="?page={{ admins.next_page_number }}">
+                                    &gt;
+                                </a>
+                            {% else %}
+                                <span class="page-link disabled px-3 py-2 border border-secondary rounded-full cursor-not-allowed">
+                                    &gt;
+                                </span>
+                            {% endif %}
+                        </li>
+                    </ul>
+                  {% endif %}
+                
+                  </div>
+                
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

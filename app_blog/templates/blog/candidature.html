@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if historique %}
+<div class="container" style="margin-bottom:23em;margin-top:9em;">
+
+    <div class="row">
+        <div class="col-12 " style='max-height: 400px;overflow-x: auto;'>
+            <h4 class='text-center'> L'ETAT DE VOS OFFRES </h4>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>MARCHÉS</th>
+                        <th>PROPOSITIONS</th>
+                        <th>STATUS</th>
+                        <th>DATES</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                {% for historique in historique %}
+                     <tr>
+                       
+                        <td>{{ historique.offre }}</td>
+                        <td>
+                            votre offre technique et administrative
+                        {% if historique.proposition1 %}
+                            <a href="{{historique.proposition1.url}}">{{ historique.proposition1.name }}</a><br>
+                        {% endif %}
+                        {% if historique.proposition2 %}
+                        votre offre financière
+                            <a href="{{historique.proposition2.url}}">{{ historique.proposition2.name }}</a><br>
+                         {% endif %}
+                         {% if candidature.proposition3 or candidature.proposition4 or candidature.proposition5 %}
+                         Autres
+                         {%endif%}
+                        {% if historique.proposition3 %}
+                            <a href="{{historique.proposition3.url}}">{{ historique.proposition3.name }}</a><br>
+                        {% endif %}
+                        {% if historique.proposition4 %}
+                            <a href="{{historique.proposition4.url}}">{{ historique.proposition4.name }}</a><br>
+                        {% endif %}
+                        {% if historique.proposition5 %}
+                            <a href="{{historique.proposition5.url}}">{{ historique.proposition5.name }}</a><br>
+                        {% endif %}
+                            </td>
+                        
+                            {% if historique.retenu %} <td class="bg-success text-light text-bold text-uppercase">Retenue</td> {% elif historique.refuser %} <td class="bg-danger text-light text-uppercase">Refuser</td> {%else%} <td class="bg-warning text-uppercase text-light">en cours</td> {% endif %}
+                                   
+
+
+                        <td>{{ historique.date }}</td>
+                    </tr>
+                   
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% elif message %}
+    <div class="container" style="margin-bottom:26em;margin-top:15em;">
+        <h2 class="text-center"> {{message}} </h2>
+
+    </div>
+{% else %}
+    <div class="container" style="margin-bottom:26em;margin-top:15em;">
+        <h2 class="text-center " > vous n'avez proposé aucune offre pour le moment  </h2>
+    </div>
+{% endif %}
+
+
+{% endblock %}

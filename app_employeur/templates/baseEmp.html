@@ -1,0 +1,118 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+     <!-- Main CSS-->
+    <link href="{%static 'emp/bootstrap.min.css'%}" rel="stylesheet">
+    <link href="{% static 'css/font-face.css'%}" rel="stylesheet" media="all">
+    <link href="{% static 'vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'vendor/font-awesome-5/css/fontawesome-all.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'css/theme.css' %}" rel="stylesheet" media="all">
+
+
+    <title>{% block title %} {% endblock %}</title>
+</head>
+
+
+
+<style>
+
+     /* Style pour désactiver les points de la liste */
+
+    /* Menu */
+    .navbar {
+        background-color: #ffc414;
+    }
+
+    .navbar-toggler {
+        background-color: #fff; /* Couleur blanche pour le texte du toggle */
+        border-color: yellow; /* Couleur blanche pour la bordure du toggle */
+        color: #000;
+    }
+    .navbar-nav .nav-link {
+        color: #fff; /* Couleur blanche pour le texte */
+        transition: color 0.3s; /* Transition pour l'effet de survol */
+    }
+
+    /* Effet de survol des liens du menu */
+    .navbar-nav .nav-link:hover {
+        color: #ffc414; /* Couleur jaune lors du survol */
+    }
+   /* Style pour désactiver les points de la liste */
+   ul{
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #337ab7;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+}
+
+
+</style>
+
+<body>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <nav class="navbar navbar-expand-md  navbar-light pi-draggable"  style="background-color: #337ab7; color:#fff;">
+      <div class="container-fluid"> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" style="background: #fff;" data-target="#navbar6">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar6"> <a class="navbar-brand text-primary d-none d-md-block" href="{% url 'debut' %}">
+            <img src="{% static 'logo1.png' %}" style="height: 60px; width:100px;" alt="Enabel Burkina">
+          </a>
+          <ul class="navbar-nav mx-auto">
+
+          </ul>
+           {% if user.is_authenticated %}
+           <p class="text-bold m-r-30">Bienvenue au groupe  {{ user.username }} |</p>
+
+           {% endif %}
+          <ul class="navbar-nav">
+            <li class="nav-item"> <a  style="color:#fff;"  class="nav-link" href="{% url 'debut' %}">Accueil</a> </li>
+            <li class="nav-item"> <a  style="color:#fff;"  class="nav-link" href="{% url 'historique' %}">Historique</a> </li>
+            <li class="nav-item"> <a  style="color:#fff;"  class="nav-link" href="{% url 'Empdeconnexion' %}">Deconnexion</a> </li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- En-tête -->
+    {% block content %}
+
+
+    {% endblock %}
+
+  </body>
+  <!-- Pied de page -->
+
+  <footer class="text-white text-center py-3" style="background-color: #337ab7; margin-top:15em;">
+    <p>Tous droits réservés &copy;<script>document.write(new Date().getFullYear());</script> - Enabel Burkina Faso</p>
+</footer>
+
+
+     <!-- JS de Bootstrap -->
+
+     <script src="{%static 'emp/jquery/jquery-2.2.4.min.js' %}"> </script>
+     <script src="{%static 'emp/bootstrap.min.js' %}"> </script>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+
+
+</html>

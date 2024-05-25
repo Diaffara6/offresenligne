@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'emp/bootstrap.min.css' %}" rel="stylesheet">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+<div class="container-fluid">
+    <div class="row justify-content-center align-items-center" style="min-height: 90vh;">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4">
+            <div class="card p-3">
+                <h3 class="mb-3 text-center">Compte Employé<br><img src="{% static 'logo1.png' %}" width="130" alt="Enabel Burkina"></h3>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Numero du marché</label>
+                        <input type="text" class="form-control" id="username" name="username" value="{% if username %}{{ username }}{% endif %}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Mot de passe</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <input type="submit" class="btn btn-custom w-100 text-light" style="background-color: #337ab7;" value="Connexion">
+
+                    {% if messages %}
+                    <div class="mt-3 alert alert-danger alert-dismissible fade show" role="alert">
+                        <ul>
+                            {% for message in messages %}
+                                <li style="list-style-type: none;" class="text-center">{% if message.tags %}{{ message }}{% endif %}</li>
+                            {% endfor %}
+                        </ul>
+                        <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+                    </div>
+                {% endif %}
+                </form>
+            </div>
+        </div>
+        
+    </div>
+    <footer class="text-white text-center py-3 " style="background-color: #337ab7;">
+        <p>Tous droits réservés &copy;<script>document.write(new Date().getFullYear());</script> - Enabel Burkina Faso</p>
+    </footer>
+    
+</div>
+
+<!-- JS de Bootstrap -->
+<script src="{% static 'emp/jquery/jquery-2.2.4.min.js' %}"></script>
+<script src="{% static 'emp/bootstrap.min.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content%}
+
+
+
+   <!-- Carrousel d'images -->
+<!-- Masthead-->
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <header class="masthead" style=" background-image: url('{% static 'image2.jpg' %}');">
+             <div class="container">
+                <div class="masthead-subheading">Bienvenue sur le site des Marchés Publics </div>
+                <div class="masthead-heading text-uppercase">d'ENABEL</div>
+            </div>
+        </header>
+</div>
+
+
+
+
+
+<h1 class="text-center text-light py-3" style="background-color: #337ab7;">LES MARCHÉS PUBLICS </h1>
+{% if messages %}
+<div class="alert alert-success mx-5 alert-dismissible fade show" role="alert">
+    <div style="list-style-type: none;"> <!-- Enlever les puces -->
+        {% for message in messages %}
+            <div class="text-center">{% if message.tags %}{{ message }}{% endif %}</div>
+        {% endfor %}
+    </div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+{% endif %}
+
+
+
+<div class="m-b-100">
+  {% for offre in offres  %}
+  
+  <div class="container mt-4">
+    <div class="card">
+      <div class="card-body">
+        <p class="card-text">{{ offre.code }}-{{ offre.description }}</p>
+        <p class="card-text"><b>Pays</b> : {{ offre.pays }}</p>
+        {% if offre.status is True %}
+        <p class="card-text"><b>Status</b> : Ouvert</p>
+        {% else %}
+        <p class="card-text"><b>Status</b> : Fermé</p>
+        {%endif%}
+        <p class="card-text"><b>Date de publication</b> : {{offre.date_pub}}</p>
+  
+        <p class="card-text"><b>Date de clôture</b> : {{offre.date_limite }} à {{offre.heure_limite}}</p>
+  
+        <h6>Pièces jointes :</h6>
+        {% if offre.doc1 %}
+        <a href="{{ offre.doc1.url }}">{{ offre.doc1|cut:"file/" }}</a><br>
+        {% endif %}
+        {% if offre.doc2 %}
+        <a href="{{ offre.doc2.url }}">{{ offre.doc2|cut:"file/" }}</a><br>
+        {% endif %}
+        {% if offre.doc3 %}
+        <a href="{{ offre.doc3.url }}">{{ offre.doc3|cut:"file/" }}</a><br>
+        {% endif %}
+        {% if offre.doc4 %}
+        <a href="{{ offre.doc4.url }}">{{ offre.doc4|cut:"file/" }}</a><br>
+        {% endif %}
+        {% if offre.doc5 %}
+        <a href="{{ offre.doc5.url }}">{{ offre.doc5|cut:"file/" }}</a><br>
+        {% endif %}
+  
+  
+        <a href="{% url 'postuler' offre.pk %}" class="btn btn-primary">Postuler</a>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+    <h2 class="text-center m-b-250 m-t-60"> Aucun marché public pour le moment revenez un peu plus tard </h2>
+  {% endfor %}
+  
+  </div>
+  
+  <div class='mt-3'>
+    {% if offres.has_previous or offres.has_next %}
+    <ul class="pagination justify-content-center">
+        <li class="page-item mx-1">
+            {% if offres.has_previous %}
+                <a class="page-link px-3 py-2 border border-primary rounded-full text-primary" href="?page={{ offres.previous_page_number }}">
+                    &lt;
+                </a>
+            {% else %}
+                <span class="page-link disabled px-3 py-2 border border-secondary rounded-full cursor-not-allowed">
+                    &lt;
+                </span>
+            {% endif %}
+        </li>
+
+        {% for num_page in offres.paginator.page_range %}
+            <li class="page-item mx-1">
+                {% if offres.number == num_page %}
+                    <a class="page-link active bg-primary text-white px-3 py-2 rounded-full" href="?page={{ num_page }}">
+                        {{ num_page }}
+                    </a>
+                {% else %}
+                    <a class="page-link border border-primary rounded-full text-primary" href="?page={{ num_page }}">
+                        {{ num_page }}
+                    </a>
+                {% endif %}
+            </li>
+        {% endfor %}
+
+        <li class="page-item mx-1">
+            {% if offres.has_next %}
+                <a class="page-link px-3 py-2 border border-primary rounded-full text-primary" href="?page={{ offres.next_page_number }}">
+                    &gt;
+                </a>
+            {% else %}
+                <span class="page-link disabled px-3 py-2 border border-secondary rounded-full cursor-not-allowed">
+                    &gt;
+                </span>
+            {% endif %}
+        </li>
+    </ul>
+  {% endif %}
+
+  </div>
+
+ 
+
+  
+  {% endblock %}
+

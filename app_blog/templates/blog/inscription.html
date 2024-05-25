@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <div class="card mt-5 mb-5">
+                <div class="card-body">
+                    <h2 class="text-center mb-4">S'inscrire</h2>
+                    <img src="{% static 'logo1.png' %}" width="130px" class="img-fluid mx-auto d-block" alt="Enabel Burkina">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="nom">Nom</label>
+                            <input type="text" class="form-control" id="nom" name="nom" value="{% if nom %}{{nom}}{% endif %}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="prenom">Prénom</label>
+                            <input type="text" class="form-control" id="prenom" name="prenom" value="{% if prenom %}{{prenom}}{% endif %}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Adresse email</label>
+                            <input type="email" class="form-control" id="email" name="email" value="{% if email %}{{email}}{% endif %}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Mot de passe</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password1">Confirmer le mot de passe</label>
+                            <input type="password" class="form-control" id="password1" name="password1" required>
+                        </div>
+                        <input type="submit" class="btn w-100 text-light mt-2" style="background-color: #337ab7;" value="S'inscrire">
+                        <p class="text-center">Vous avez déjà un compte ? <a href="{% url 'connexion' %}">Connexion</a></p>
+                    {% if messages %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <div style="list-style-type: none;"> <!-- Enlever les puces -->
+                                {% for message in messages %}
+                                    <div class="text-center">{% if message.tags %}{{ message }}{% endif %}</div>
+                                {% endfor %}
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        
+                    {% endif %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

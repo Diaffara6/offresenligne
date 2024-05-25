@@ -1,0 +1,140 @@
+{% extends 'baseA.html' %}
+{% block content %}
+{% include 'baseMenu.html' %}
+
+
+<style>
+    .centered-card {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 10vh;
+    }
+</style>
+
+<div class="main-content">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="overview-wrap mb-3">
+                        <h2 class="title-3"><a href="{%url 'accueil'%}"><- Accueil </a></h2>
+
+
+                    </div>
+                </div>
+            </div>
+            <!-- La liste des cadidatures en fonction des offres -->
+            <h2 class="text-center text-light pt-3 pb-3 " style="background-color: #337ab7; color:#fff;">Les Marchés publics </h2>
+             
+            {% if messages %}
+            <div class="m-9 alert alert-success alert-dismissible fade show" role="alert">
+                <ul>
+                {% for message in messages %}
+                <li class="text-center"> {% if message.tags %} {{ message }}  {% endif %}</li>
+                {% endfor %}
+                </ul>
+                <button type="button" class="close" data-dismiss="alert"> <span>&times;</span> </button>
+            
+            </div>
+            
+            
+            {% endif %}
+
+            <div class="row m-t-30">
+                <div class="col-md-12  row mx-1 ">
+                    <!-- DATA TABLE-->
+                     
+                         
+            
+                {% for offre in offres %}
+                
+                <div class="card text-center col-12 col-md-6 col-lg-4  pb-2 mt-1 mb-1  ">
+                    {% if not offre.status %}
+                    <a href="{% url 'candidature_par_offre' offre.code %}">
+                    <div class="card-body">
+                        
+                        <h5 class="card-title">{{offre.code}}</h5>
+                        <p class="card-text">{{offre.description|slice:":30"}}...</p>
+                        <p class="card-text text-success">{{offre.date_limite}}  a {{offre.heure_limite}}</p>
+                        <p class="card-text text-success text-dark">Offre = {{offre.nombre_candidatures}} </p>
+
+                    </div>
+                </a>
+                 {% else %}
+                <div class="card-body">
+                        
+                    <h5 class="card-title">{{offre.code}}</h5>
+                    <p class="card-text">{{offre.description|slice:":30"}}...</p>
+                    <p class="card-text text-danger">Patientez jusqu'au {{offre.date_limite}} a {{offre.heure_limite}}</p>
+                    <p class="card-text text-success text-dark">Offre = {{offre.nombre_candidatures}} </p>
+
+                    
+                </div>
+                
+           
+              
+       
+                {% endif %}
+                <a href="{% url 'affecte_employe_marche_public' offre.pk %}"><button class="btn btn-success col-12 col-md-12 col-lg-12"> Affectez un employé </button></a>
+                
+               
+                </div>
+                {%empty%}
+                    <h2 class="text-center"> Marché public vide  </h2>
+                    <br>
+           
+                {% endfor %}
+          
+       
+            
+                <!-- END DATA TABLE-->
+            </div>
+        </div>
+        <div class='mb-0'>
+            {% if offres.has_previous or offres.has_next %}
+    <ul class="pagination justify-content-center">
+        <li class="page-item mx-1">
+            {% if offres.has_previous %}
+                <a class="page-link px-3 py-2 border border-primary rounded-full text-primary" href="?page={{ offres.previous_page_number }}">
+                    &lt;
+                </a>
+            {% else %}
+                <span class="page-link disabled px-3 py-2 border border-secondary rounded-full cursor-not-allowed">
+                    &lt;
+                </span>
+            {% endif %}
+        </li>
+
+        {% for num_page in offres.paginator.page_range %}
+            <li class="page-item mx-1">
+                {% if offres.number == num_page %}
+                    <a class="page-link active bg-primary text-white px-3 py-2 rounded-full" href="?page={{ num_page }}">
+                        {{ num_page }}
+                    </a>
+                {% else %}
+                    <a class="page-link border border-primary rounded-full text-primary" href="?page={{ num_page }}">
+                        {{ num_page }}
+                    </a>
+                {% endif %}
+            </li>
+        {% endfor %}
+
+        <li class="page-item mx-1">
+            {% if offres.has_next %}
+                <a class="page-link px-3 py-2 border border-primary rounded-full text-primary" href="?page={{ offres.next_page_number }}">
+                    &gt;
+                </a>
+            {% else %}
+                <span class="page-link disabled px-3 py-2 border border-secondary rounded-full cursor-not-allowed">
+                    &gt;
+                </span>
+            {% endif %}
+        </li>
+    </ul>
+  {% endif %}  
+
+        </div>
+    </div>
+</div>
+  {% endblock %}

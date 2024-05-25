@@ -1,0 +1,224 @@
+{% load static %}
+{% block content %}
+
+<!-- HEADER MOBILE-->
+<header class="header-mobile d-block d-lg-none" style="background-color:#337ab7;">
+    <div class="header-mobile__bar">
+        <div class="container-fluid" style="background-color:#337ab7;">
+            <div class="header-mobile-inner" >
+                <a class="logo" href="{% url 'accueil'%}">
+                    <!-- logo d'enabel-->
+                    <img src="{% static 'logo1.png' %}" style="width:95px;" alt="EnabelAdmin" />
+                </a>
+                <button class="hamburger hamburger--slider" type="button">
+                    <span class="hamburger-box">
+                        <span class="hamburger-inner"></span>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar-mobile" style="background-color:#337ab7;">
+        <div class="container-fluid">
+            <ul class="navbar-mobile__list list-unstyled">
+                <!-- menu candidatures -->
+                <li class="has-sub" style="background-color:#337ab7;" >
+                    <a class="js-arrow" style="background-color:#337ab7; color:#fff;" href="#">
+                        <i class="fas fa-check-circle"></i>Les Offres</a>
+                    <ul class="navbar-mobile-sub__list list-unstyled js-sub-list" style="background-color:#337ab7;">
+                        <li >
+                            <a style="color:#fff;" href="{%url 'candidatures' %}">La listes des Offres</a>
+                        </li>
+                        
+                     
+                    </ul>
+                </li>
+                <!-- menu Employeurs-->
+                <li class="has-sub">
+                    <a class="js-arrow" style="background-color:#337ab7; color:#fff;" href="#">
+                        <i class="fas fa-user"></i>Les Employés</a>
+                    <ul style="background-color:#337ab7;" class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                        <li>
+                            <a style="color:#fff;" href="{%url 'employeurs' %}">La listes des Employés</a>
+                        </li>
+                        <li>
+                            <a style="color:#fff;" href="{%url 'ajouter_employeur' %}">Ajouter un Employé</a>
+                        </li>
+                        
+                     
+                    </ul>
+                </li>
+                <!-- menu Entreprises-->
+                <li class="has-sub">
+                    <a class="js-arrow" style="background-color:#337ab7; color:#fff;" href="#">
+                        <i class="fas fa-calendar"></i>Entreprises</a>
+                    <ul style="background-color:#337ab7;" class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                        <li>
+                            <a style="color:#fff;" href="{%url 'entreprises' %}">La listes des Entreprises</a>
+                        </li>
+
+                    </ul>
+                </li>
+            
+                <!-- menu Offres-->
+                <li class="has-sub">
+                    <a class="js-arrow" style="background-color:#337ab7; color:#fff;" href="#">
+                        <i class="fas fa-home"></i>Les Marchés publics</a>
+                    <ul style="background-color:#337ab7;" class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                        <li>
+                            <a style="color:#fff;" href="{%url 'offres' %}">La listes des Marchés publics</a>
+                        </li>
+                        <li>
+                            <a style="color:#fff;" href="{%url 'ajouter_offre' %}">Publier un Marché public</a>
+                        </li>
+
+                    </ul>
+                </li> 
+                 <!-- menu Admin-->
+                {% if user.is_staff %}
+                    <li class="has-sub">
+                        <a class="js-arrow" style="background-color:#337ab7; color:#fff;" href="#">
+                            <i class="fas fa-user-circle"></i>Les Administrateurs </a>
+                        <ul style="background-color:#337ab7;" class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                            <li>
+                                <a style="color:#fff;" href="{%url 'admins' %}">La listes des Administrateurs</a>
+                            </li>
+                            <li>
+                                <a style="color:#fff;" href="{%url 'ajouter_admin' %}">Ajouter un Administrateur</a>
+                            </li>
+
+                        </ul>
+                    </li>   
+                {% endif %}                     
+               
+            </ul>
+        </div>
+    </nav>
+</header>
+<!-- END HEADER MOBILE-->
+
+<!-- MENU SIDEBAR-->
+<aside class="menu-sidebar d-none d-lg-block" style="background-color:#337ab7;">
+    <div class="logo" style="background-color:#337ab7;">
+        <a href="{% url 'accueil' %}">
+            <!-- logo d'enabel-->
+            <img src="{% static 'logo1.png' %}" style="width:95px;"alt="enabelAdmin" />
+        </a>
+    </div>
+    <div class="menu-sidebar__content js-scrollbar1">
+        <nav class="navbar-sidebar">
+            <ul class="list-unstyled navbar__list">
+              
+         
+                <!-- menu candidatures-->
+                <li class="has-sub">
+                    <a class="js-arrow" style="color:#fff;" href="#">
+                        <i class="fas fa-check-circle"></i>Les offres</a>
+                    <ul class="list-unstyled navbar__sub-list js-sub-list">
+                        <li>
+                            <a style="color:#fff;" href="{%url 'candidatures' %}">La Liste des offres</a>
+                        </li>
+                    </ul>
+                </li>
+
+                 <!-- menu Employeurs-->
+                <li class="has-sub">
+                    <a class="js-arrow" style="color:#fff;" href="#">
+                        <i class="fas fa-user"></i>Les Employés</a>
+                    <ul class="list-unstyled navbar__sub-list js-sub-list">
+                        <li>
+                            <a style="color:#fff;" href="{%url 'employeurs' %}">La Liste des Employés</a>
+                        </li>
+                        <li>
+                            <a style="color:#fff;" href="{%url 'ajouter_employeur' %}">Ajouter un Employé</a>
+                        </li>
+                    </ul>
+                </li>
+
+                   <!-- menu Entreprises-->
+                   <li class="has-sub">
+                    <a class="js-arrow" style="color:#fff;" href="#">
+                        <i class="fas fa-calendar"></i>Les Entreprises</a>
+                    <ul class="list-unstyled navbar__sub-list js-sub-list">
+                        <li>
+                            <a style="color:#fff;" href="{%url 'entreprises' %}">La Liste des Entreprises</a>
+                        </li>
+                       
+                    </ul>
+                </li>
+
+                    <!-- menu Offres-->
+                    <li class="has-sub">
+                        <a class="js-arrow" style="color:#fff;" href="#">
+                            <i class="fas fa-home"></i>Les Marchés publics</a>
+                        <ul class="list-unstyled navbar__sub-list js-sub-list">
+                            <li>
+                                <a style="color:#fff;" href="{%url 'offres' %}">La Liste des Marchés publics</a>
+                            </li>
+                            <li>
+                                <a style="color:#fff;" href="{%url 'ajouter_offre' %}">Publier un Marché public</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- menu Admin-->
+                   
+                   {% if user.is_staff %}
+                    <li class="has-sub">
+                        <a class="js-arrow" style="color:#fff;" href="#">
+                            <i class="fas fa-user-circle"></i>Les Administrateurs</a>
+                        <ul class="list-unstyled navbar__sub-list js-sub-list">
+                            <li>
+                                <a style="color:#fff;" href="{%url 'admins' %}">La Liste des Administrateurs</a>
+                            </li>
+                            <li>
+                                <a style="color:#fff;" href="{%url 'ajouter_admin' %}">Ajouter un Administrateur</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                   {% endif %}
+                    
+
+                
+               
+
+              
+            </ul>
+        </nav>
+    </div>
+</aside>
+<!-- END MENU SIDEBAR-->
+
+<!-- PAGE CONTAINER-->
+<div class="page-container">
+    <!-- HEADER DESKTOP-->
+    <header class="header-desktop" style="background-color:#337ab7;" >
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="header-wrap">
+                    
+                    <form class="form-header" action="{% url 'rechercher' %}"  method="GET">
+                        {% csrf_token %}
+                        <input class="au-input au-input--xl" type="text" name="q"   placeholder="Recherche..." />
+                        <button class="au-btn--submit" type="submit">
+                            <i class="zmdi zmdi-search"></i>
+                        </button>
+                    </form>
+                    
+                      <!-- le nom de l'admin-->
+                        <p style="color:#fff;" class="text-uppercase text-center m-t-10" > Bienvenue , Mr {{ user.last_name}} {{ user.first_name}}  </a>
+                    <div class="header-button"> 
+                           <a style="color:#fff; float:right;" class="m-l-20 btn btn-danger" href="{%url 'Adeconnexion'%}">
+                            <i class="zmdi zmdi-power mr-2"></i>Deconnexion</a>
+                             
+                         
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- HEADER DESKTOP-->
+
+
+{% endblock %}

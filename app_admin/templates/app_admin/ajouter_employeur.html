@@ -1,0 +1,110 @@
+{% extends 'baseA.html' %}
+{% block content %}
+{% include 'baseMenu.html' %}
+
+    <div class="main-content">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+                <div class="overview-wrap mb-3">
+                    <h2 class="title-3"><a href="{%url 'employeurs'%}"><- Les employés</a></h2>
+
+
+                </div>
+            </div>
+        </div>
+
+            <div class="container" style="margin-bottom:3em;">
+                <div class="row justify-content-center">
+                  <div class="col-md-7">
+                    <div class="card mt-5 mb-5">
+                      <div class="card-body">
+                        {% if modif %}
+                          <h2 class="text-center mb-4">Modifiez le groupe d'employé {{utilisateur.username}}</h2>
+                        {% else %}
+                          <h2 class="text-center mb-4">Ajouter un groupe d'employé</h2>
+                        {% endif %}
+                        <form method="POST">
+                            {% csrf_token %}
+
+                            {% if not modif %}
+                          <div class="">
+                            <label for="username">Numero du marché</label>
+                            <input type="text" required class="form-control" id="username" name="username" value="{% if username %}{{username}} {% endif %}">
+                          </div>
+                          {%endif%}
+
+                          <div class=""><br>
+
+                            {% if modif %}
+                            <label for="password">Nouveau Mot de passe</label><br>
+                            {% else %}
+                              <label for="password">Mot de passe</label><br>
+                            {% endif %}
+                            <input type="password" class="form-control" name="password" id="password"  value="{% if password %}{{password}}{% endif %}" >
+                          </div>
+
+                          <div class="form-group"><br>
+                            <label for="password1">Confirmez le mot de passe</label><br>
+                            <input type="password" class="form-control" name="password1" id="password1"  value="{% if password1 %}{{password1}}{% endif %}">
+                          </div>
+                          <h4 class="text-center">La fonction des employés</h4><br>
+
+                          <div class="form-group">
+                            <label for="fonction1">Fonction du 1er employé</label>
+                            <input type="text" class="form-control" id="fonction1" name="fonction1" value="{% if fonction1 %}{{fonction1}}{%else%}{{e.fonction1}}{% endif %}">
+                          </div>
+                          <div class="form-group">
+                            <label for="fonction2">Fonction du 2eme employé</label>
+                            <input type="text" class="form-control" id="fonction2" name="fonction2" value="{% if fonction2 %}{{fonction2}}{%else%}{{e.fonction2}}{% endif %}">
+                          </div>
+
+                            <h4 class="text-center">L'adresse email des employés </h4>
+                          <div class=""><br>
+                            <label for="email1">Email du 1er Employé</label><br>
+                            <input type="email" class="form-control" required name="email1" id="email1"  value="{% if email1 %}{{email1}}{%else%}{{e.email1}}{% endif %}">
+                          </div>
+                          <div class="form-group"><br>
+                            <label for="email2">Email du 2eme Employé</label><br>
+                            <input type="email" class="form-control" required name="email2" id="email2"  value="{% if email2 %}{{email2}}{%else%}{{e.email2}}{% endif %}">
+                          </div>
+
+                          <h4 class="text-center">Codes de Déverrouillage pour ce groupe d'employé </h4>
+                            <p class="text-center mt-2 mb-4">Les codes de deverouillages sont automatiquement générés et envoyés par l'adresse email des employés</p>
+
+
+                         {% if modif %}
+                         <input type="submit" class="btn btn-custom w-100"   style="background-color:#337ab7; color: #fff;" value="Modifier" >
+                         {% else %}
+                         <input type="submit" class="btn btn-custom w-100"   style="background-color:#337ab7; color: #fff;" value="Ajouter" >
+                         {% endif %}
+
+
+                          {% if messages %}
+            <div class="m-9 mt-2 alert alert-danger alert-dismissible fade show" role="alert">
+                <ul>
+                {% for message in messages %}
+                <li class="text-center"> {% if message.tags %} {{ message }}  {% endif %}</li>
+                {% endfor %}
+                </ul>
+                <button type="button" class="close" data-dismiss="alert"> <span>&times;</span> </button>
+
+            </div>
+
+
+            {% endif %}
+
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+        </div>
+    </div>
+</div>
+{% endblock content %}

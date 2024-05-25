@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content%}
+
+{% if messages %}
+
+<div class="m-9 alert alert-success alert-dismissible fade show" role="alert">
+  <ul>
+  {% for message in messages %}
+  <li class="text-center"> {% if message.tags %} {{ message }}  {% endif %}</li>
+  {% endfor %}
+  </ul>
+  <button type="button" class="close" data-dismiss="alert"> <span>&times;</span> </button>
+</div>
+
+
+{% endif %}
+
+   <!-- Carrousel d'images -->
+   <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
+        <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
+        <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="{% static 'image1.png' %}" class="d-block w-100" alt="Image 1">
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'image1.png' %}" class="d-block w-100" alt="Image 2">
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'image1.png' %}" class="d-block w-100" alt="Image 3">
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Précédent</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Suivant</span>
+    </a>
+</div>
+
+
+
+<h1 class="text-center text-light" style="background-color: #337ab7;">MARCHÉS PUBLICS </h1>
+<div class="m-b-100">
+{% for offre in offres  %}
+
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-body">
+      <p class="card-text">{{ offre.code }}-{{ offre.description }}</p>
+      <p class="card-text"><b>Pays</b> : {{ offre.pays }}</p>
+      {% if offre.status is True %}
+      <p class="card-text"><b>Status</b> : Ouvert</p>
+      {% else %}
+      <p class="card-text"><b>Status</b> : Fermé</p>
+      {%endif%}
+      <p class="card-text"><b>Date de publication</b> : {{offre.date_pub}}</p>
+
+      <p class="card-text"><b>Date de clôture</b> : {{offre.date_limite }} à {{offre.heure_limite}}</p>
+
+      <h6>Pièces jointes :</h6>
+      {% if offre.doc1 %}
+      <a href="{{ offre.doc1.url }}">{{ offre.doc1 }}</a><br>
+      {% endif %}
+      {% if offre.doc2 %}
+      <a href="{{ offre.doc2.url }}">{{ offre.doc2 }}</a><br>
+      {% endif %}
+      {% if offre.doc3 %}
+      <a href="{{ offre.doc3.url }}">{{ offre.doc3 }}</a><br>
+      {% endif %}
+      {% if offre.doc4 %}
+      <a href="{{ offre.doc4.url }}">{{ offre.doc4 }}</a><br>
+      {% endif %}
+      {% if offre.doc5 %}
+      <a href="{{ offre.doc5.url }}">{{ offre.doc5 }}</a><br>
+      {% endif %}
+
+
+
+      <a href="{% url 'postuler' offre.pk %}" class="btn btn-primary">Postuler</a>
+    </div>
+  </div>
+</div>
+{% empty %}
+  <h2 class="text-center m-b-250 m-t-60"> Aucun marché public pour le moment revenez un peu plus tard </h2>
+{% endfor %}
+</div>
+
+
+
+
+{% endblock %}

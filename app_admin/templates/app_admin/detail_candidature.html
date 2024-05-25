@@ -1,0 +1,122 @@
+{% extends 'baseA.html' %}
+{% block content %}
+{% include 'baseMenu.html' %}
+
+<div class="main-content">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="overview-wrap mb-3">
+                        <h2 class="title-3"><a href="{%url 'candidatures'%}"><- Marchés publics  </a></h2>
+                       
+                        
+                    </div>
+                </div>
+            </div>
+            <!-- La liste des cadidatures en fonction des offres -->
+            <h2 class="text-center  text-light pt-3 pb-3 " style="background-color: #337ab7; color:#fff;">La liste des offres pour le marché public ({{ offre.code }}) </h2>
+            
+            <div class="row m-t-30">
+                <div class="col-md-12">
+                    <!-- DATA TABLE-->
+                   
+                    <h4>Description de l'offre :</h4><p class="">  {{ offre.description }}</p><br>
+
+
+                    <div class="table-responsive m-b-40">
+                        <table class="table table-bordered table-data3">
+                            <thead>
+                                <tr>
+                                    
+                                    <th>Entreprise(s)</th>
+                                    <th>Email(s)</th>
+                                    <th>Telephone(s)</th>
+                                    <th>Immatriculation</th>
+                                    <th>Offre(s)</th>
+                                    <th>employé(s)</th>
+                                    <th>Statut</th>
+                                    <th>Date(s)</th>
+                                    <th>Delai d'etude</th>
+                                    <th>Modifications </th>
+                                </tr>
+                            </thead>
+                          
+                                {% for candidature in candidatures %}
+                                 <tr>
+                                    <td>{{ candidature.entreprise.nom_entrep }} </td>
+                                    <td>{{ candidature.entreprise.email_entrep }} </td>
+                                    <td>{{ candidature.entreprise.idtel }}  {{ candidature.entreprise.telephone }} </td>
+                                    <td>{% if candidature.entreprise.immatriculation %}{{ candidature.entreprise.immatriculation }} {% else %} vide {% endif %}</td>
+                                    
+                                    <td>
+
+                                    {% if candidature.proposition1 %}
+                                    Offre technique et administratif
+                                    <a href="{{ candidature.proposition1.url }}">{{ candidature.proposition1|cut:"documents/" }}</a> <br>
+                                    {% endif %}
+                                    
+                                    {% if candidature.proposition2 %}
+                                    Offre financière
+                                    <a href="{{ candidature.proposition2.url }}">{{candidature.proposition2|cut:"documents/" }}</a> <br>
+                                    {% endif %}
+                                    {% if candidature.proposition3 or candidature.proposition4 or candidature.proposition5 %}
+                                    Autres
+                                    {%endif%}
+                                    {% if candidature.proposition3 %}
+                                    <a href="{{ candidature.proposition3.url }}">{{candidature.proposition3|cut:"documents/" }}</a> <br>
+                                    {% endif %}
+                                    {% if candidature.proposition4 %}
+                                    <a href="{{ candidature.proposition4.url }}">{{candidature.proposition4|cut:"documents/" }}</a> <br>
+                                    {% endif %}
+                                    {% if candidature.proposition5 %}
+                                    <a href="{{ candidature.proposition5.url }}">{{candidature.proposition5|cut:"documents/" }}</a> <br>
+                                    {% endif %}
+                                        </td>
+
+                                    <td>{% if  offre.employe  %}
+                                    {{ offre.employe }}
+                                    {% else %}
+                                    Aucun employe associé
+                                    {% endif %}</td>
+
+                                     {% if candidature.retenu %} <td class="bg-success text-light text-bold text-uppercase">Retenue</td> {% elif candidature.refuser %} <td class="bg-danger text-light text-uppercase">Refuser</td> {%else%} <td class="bg-warning text-uppercase text-light">en cours</td> {% endif %}
+                                    <td>{{ candidature.date }} </td>
+                                    <td>
+                                    {% if offre.delai %}
+                                        {{ offre.delai }} 
+                                    {% else %}
+                                        Aucune date associée
+                                    {% endif %}
+                                        </td>
+                                    
+                                    <td>
+                                        <div class="table-data-feature">
+                                            
+                                            <a class="m-2 bg-success" href="{% url 'accepter_candidature' candidature.pk %}"> <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="accepter">
+                                                <i class="fa fa-thumbs-up"></i> 
+                                            </button></a>
+
+                                            <a class="m-2 bg-danger" href="{% url 'refuser_candidature' candidature.pk %}">  <button class="btn btn-danger" onclick="return confirm('etes vous sûr de vouloir refuser cette offre ')" class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="refuser">
+                                                <i class="fa fa-thumbs-down"></i> 
+                                            </button>
+                                        </div></a>
+                                        
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- END DATA TABLE-->
+                </div>
+            </div>
+            
+
+        </div>
+    </div>
+</div>
+
+   
+  {% endblock %}
+    
