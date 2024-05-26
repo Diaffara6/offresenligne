@@ -60,9 +60,15 @@ def format_date(date_string):
 
 
 def send_mail_to_employers(username, password, email, code1='', code2=''):
-    info = f"""{code1}
-     Vous avez été designé comme le 1er employé """ if code1 else f"""{code2}
-     Vous avez été designé comme le 2em employé"""
+    info = f"""
+------------
+{code1}
+-----------
+Vous avez été designé comme le 1er employé """ if code1 else f"""
+------------
+{code2}
+------------
+Vous avez été designé comme le 2em employé"""
     message = f"""
 Bonjour/Bonsoir,
 
@@ -75,10 +81,7 @@ Numero du Marché : {username}
 Mot de passe : {password}
 **********************************
 Voici votre code de deverouillage :
-
----------------------------------
 {info}
----------------------------------
 NB: le code de deverouillage est confidentiel
 
 {BASE_URL}/employe
@@ -535,7 +538,7 @@ def modifier_employeur(request, id):
 
 @user_passes_test(is_superuser, login_url="Aconnexion")
 def employeurs(request):
-    employeurs = Employeur.objects.all()
+    employeurs = Employeur.objects.all().order_by('-id')
     page = request.GET.get('page', 1)
     paginator = Paginator(employeurs, 10)  # Afficher 10 employeurs par page
     try:

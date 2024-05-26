@@ -59,24 +59,24 @@
 
                                     {% if candidature.proposition1 %}
                                     Offre technique et administratives
-                                    <a href="{{ candidature.proposition1.url }}">{{ candidature.proposition1 }}</a> <br>
+                                    <a href="{{ candidature.proposition1.url }}">{{ candidature.proposition1|cut:'documents/' }}</a> <br>
                                     {% endif %}
                                     
                                     {% if candidature.proposition2 %}
                                     Offre financière
-                                    <a href="{{ candidature.proposition2.url }}">{{candidature.proposition2}}</a> <br>
+                                    <a href="{{ candidature.proposition2.url }}">{{candidature.proposition2|cut:'documents/'}}</a> <br>
                                     {% endif %}
                                     {% if candidature.proposition3 or candidature.proposition4 or candidature.proposition5 %}
                                     Autres
                                     {%endif%}
                                     {% if candidature.proposition3 %}
-                                    <a href="{{ candidature.proposition3.url }}">{{candidature.proposition3}}</a> <br>
+                                    <a href="{{ candidature.proposition3.url }}">{{candidature.proposition3|cut:'documents/'}}</a> <br>
                                     {% endif %}
                                     {% if candidature.proposition4 %}
-                                    <a href="{{ candidature.proposition4.url }}">{{candidature.proposition4}}</a> <br>
+                                    <a href="{{ candidature.proposition4.url }}">{{candidature.proposition4|cut:'documents/'}}</a> <br>
                                     {% endif %}
                                     {% if candidature.proposition5 %}
-                                    <a href="{{ candidature.proposition5.url }}">{{candidature.proposition5}}</a> <br>
+                                    <a href="{{ candidature.proposition5.url }}">{{candidature.proposition5|cut:'documents/'}}</a> <br>
                                     {% endif %}
                                         </td>
 
