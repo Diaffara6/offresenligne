@@ -212,7 +212,7 @@ def compare_date_heure(offre):
 
 def index(request):
     page = request.GET.get('page', 1)
-    paginator = Paginator(Marche_public.objects.all().order_by('-date_pub'), 5)  # Afficher 10 offres par page
+    paginator = Paginator(Marche_public.objects.all().order_by('-date_pub'), 10)  # Afficher 10 offres par page
 
     try:
         offres = paginator.page(page)

@@ -334,7 +334,7 @@ def ajouter_offre(request):
         description = request.POST['description']
         pays = request.POST['pays']
         if not pays:
-            pays = 'Guinée'
+            pays = 'Burkina Faso'
         date_limite = request.POST['date_limite']
         heure_limite = request.POST['heure_limite']
 

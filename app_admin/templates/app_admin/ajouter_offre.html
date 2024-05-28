@@ -26,11 +26,11 @@
                             {% csrf_token %}
             
                           <div class="form-group">
-                            <label for="code">Numero du marché public</label>
+                            <label for="code">Numero du marché</label>
                             <input type="text" class="form-control" id="code" name="code" value="{% if code %}{{ code }}{% endif %}" required>
                           </div>
                           <div class="form-group">
-                            <label for="description">description</label>
+                            <label for="description">Intitulé du marché</label>
                             <textarea rows="7" style="resize: none;" class="form-control" id="description" name="description">{% if offre.description %}{{ offre.description }}{% endif %}</textarea>
                           </div>
                           <div class="form-group">

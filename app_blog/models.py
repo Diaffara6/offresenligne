@@ -25,7 +25,7 @@ class Marche_public(models.Model):
     code = models.CharField(max_length=300, verbose_name="code de l'offre", primary_key=True)
     description = models.TextField()
     status = models.BooleanField(default=True)
-    pays = models.CharField(max_length=15, default="Guinée")
+    pays = models.CharField(max_length=20, default="Burkina Faso")
     employe = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     doc1 = models.FileField(upload_to='file/', blank=True, null=True)
     doc2 = models.FileField(upload_to='file/', blank=True, null=True)
