@@ -483,6 +483,7 @@ def modifier_employeur(request, id):
     e = Employeur.objects.get(utilisateur=user)
 
     if request.method == "POST":
+        username = request.POST.get("username")
         fonction1 = request.POST.get("fonction1")
         fonction2 = request.POST.get("fonction2")
         password = request.POST.get("password")
@@ -492,6 +493,13 @@ def modifier_employeur(request, id):
         code1 = ''.join(random.choices('0123456789', k=6))
         code2 = ''.join(random.choices('0123456789', k=6))
 
+        if username == user.username or not User.objects.filter(username=username).exists():
+            user.username = username
+            user.save()
+        else:
+            messages.error(request, "cet Numero de marché existe deja pour un employé .")
+            return redirect(request.META.get('HTTP_REFERER'))
+        
         if password and password1:
             if password != password1:
                 messages.error(request, "Vos mots de passe ne correspondent pas.")
@@ -503,6 +511,9 @@ def modifier_employeur(request, id):
                 hashed_password = make_password(password)
                 user.password = hashed_password
                 user.save()
+        
+
+
         if fonction1:
             e.fonction1 = fonction1
             e.save()

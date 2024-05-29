@@ -138,7 +138,8 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "offres.enlignes@gmail.com"
 EMAIL_HOST_PASSWORD = "eensmdavzggzigvm"
-
+EMAIL_HOST_USER_SECONDARY = "contact@offresenligne.com"
+EMAIL_HOST_PASSWORD_SECONDARY = "psswd1234secure"
 
 
 BASE_URL = 'www.offresenligne.com'

@@ -14,19 +14,19 @@
                 <form method="POST" >
                     {% csrf_token %}
 
-                  <div class="form-group">
+                  <div class="form-group my-2">
                     <label for="nom_entrep">Nom de l'entreprise</label>
-                    <input type="text" class="form-control" id="nom_entrep" name="nom_entrep" value="{% if nom_entrep %}{{nom_entrep}}{% endif %}" required>
+                    <input type="text" class="form-control mt-2" id="nom_entrep" name="nom_entrep" value="{% if nom_entrep %}{{nom_entrep}}{% endif %}" required>
                   </div>
-                  <div class="form-group">
+                  <div class="form-group my-2">
                     <label for="adresse_entrep">Adresse de l'entreprise</label>
-                    <input type="text" class="form-control" id="adresse_entrep" name="adresse_entrep" value="{% if adresse_entrep %}{{adresse_entrep}}{% endif %}" required>
+                    <input type="text" class="form-control mt-2" id="adresse_entrep" name="adresse_entrep" value="{% if adresse_entrep %}{{adresse_entrep}}{% endif %}" required>
                   </div>
-                  <div class="form-group">
+                  <div class="form-group my-2">
                     <label for="email"> Email de l'entreprise</label>
-                    <input type="email" class="form-control" id="email" name="email" value="{% if email %}{{email}}{% endif %}" required>
+                    <input type="email" class="form-control mt-2" id="email" name="email" value="{% if email %}{{email}}{% endif %}" required>
                   </div>
-                  <div class="form-group">
+                  <div class="form-group my-2">
                     
                     <label for="activite">Secteur d'activité de l'entreprise</label>
                         <select id="secteur" name="secteur" class="mb-3 col-5">
@@ -51,11 +51,11 @@
                             <option value="Mécanique (Moto et Auto)">Mécanique moto et auto</option>
                             <option value="autre">Autre</option>
                      </select>
-                    <input type="text" placeholder='ecrivez votre activité ici' class="form-control" id="activite" name="activite" value="{% if activite %}{{activite}}{% endif %}">
+                    <input type="text" placeholder='ecrivez votre activité ici' class="form-control mt-2" id="activite" name="activite" value="{% if activite %}{{activite}}{% endif %}">
                   </div>
                      
                      <!-- numero -->
-                     <div class="form-group">
+                     <div class="form-group my-2">
                       <label for="telephone">Votre numéro de téléphone</label>
                       <div class="row">
                           <div class="col-3 pr-0">
@@ -140,7 +140,7 @@
                               </select>
                           </div>
                           <div class="col-9 pl-1">
-                              <input type="number" class="form-control" id="telephone" name="telephone" value="{% if telephone %}{{telephone}}{% endif %}" required>
+                              <input type="number" class="form-control " id="telephone" name="telephone" value="{% if telephone %}{{telephone}}{% endif %}" required>
                           </div>
                       </div>
                   </div>
@@ -148,9 +148,9 @@
 
                      <!-- numero -->
 
-                  <div class="form-group">
+                  <div class="form-group my-2">
                     <label for="immatriculation">Numéro d'immatriculation (RCCM) </label>
-                    <input type="text" class="form-control" id="immatriculation" name="immatriculation" placeholder="optionnel" value="{% if immatriculation %}{{immatriculation}}{% endif %}" >
+                    <input type="text" class="form-control mt-2" id="immatriculation" name="immatriculation" placeholder="optionnel" value="{% if immatriculation %}{{immatriculation}}{% endif %}" >
                   </div><br>
 
                   <input type="submit" class="btn btn-custom w-100"  style="background-color: #337ab7; color:#fff;" value="Enregistrer" >

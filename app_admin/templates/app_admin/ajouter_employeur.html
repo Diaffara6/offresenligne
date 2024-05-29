@@ -28,12 +28,12 @@
                         <form method="POST">
                             {% csrf_token %}
 
-                            {% if not modif %}
+                           
                           <div class="">
                             <label for="username">Numero du marché</label>
-                            <input type="text" required class="form-control" id="username" name="username" value="{% if username %}{{username}} {% endif %}">
+                            <input type="text" required class="form-control" id="username" name="username" value="{% if username %}{{username}}{%else%}{{utilisateur.username}}{% endif %}">
                           </div>
-                          {%endif%}
+                       
 
                           <div class=""><br>
 
