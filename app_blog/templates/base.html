@@ -31,6 +31,8 @@
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Accueil</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'candidature' %}">Mes candidatures</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'guide' %}">Guide</a></li>
+
                         <li class="nav-item"><a class="nav-link" href="{% url 'apropos' %}">A propos</a></li>
                          {% if not user.is_authenticated  %}
                         <li class="nav-item"><a class="nav-link" href="{% url 'inscription' %}">Inscription</a></li>

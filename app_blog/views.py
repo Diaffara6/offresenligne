@@ -228,6 +228,9 @@ def index(request):
     context = {'offres': offres}
     return render(request=request, template_name='blog2/index.html', context=context)
 
+def guide(request):
+    return render(request=request, template_name='blog/guide.html')
+
 
 
 def detail(request, id):
@@ -274,10 +277,10 @@ def postuler(request, id):
                         return redirect(request.META.get('HTTP_REFERER'))
 
                     elif fichier:
-                        if fichier.name.endswith(('.docx', '.pdf','.xlsx')):
+                        if fichier.name.endswith('.pdf'):
                             setattr(candidature, proposition_fields[i], fichier)
                         else:
-                            messages.error(request, f"Format de fichier incorrect (pdf ou docx) pour le fichier {i + 1}.")
+                            messages.error(request, f"Format de fichier incorrect (pdf uniquement)  pour le fichier {i + 1}.")
                             return redirect(request.META.get('HTTP_REFERER'))
 
                 candidature.save()

@@ -1,0 +1,143 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+
+     <!-- About-->
+        <section class="page-section" id="about">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Guide d'utilisation </h2>
+
+                </div>
+                <ul class="timeline">
+                    <li>
+                        <div class="timeline-image"><h4>
+
+                                <br />
+                               ETAPE 1
+                                <br />
+
+                            </h4></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4></h4>
+                                <h4 class="subheading">INSCRIPTION</h4>
+                            </div>
+                            <div class="timeline-body"><p class="text-muted">
+
+                                    Une fois sur la page d'accueil, allez sur l'onglet "Inscription".
+                                    Remplissez le premier formulaire avec les informations requises (nom, prénom, adresse e-mail, etc.).
+                                    Suivez les instructions pour créer un compte.
+                                <img class=" h-100 w-100  img-fluid" src="{% static 'et1.png' %}" alt="..." /><hr>
+                                <img class=" h-100 w-100  img-fluid" src="{% static 'et1-1.png' %}" alt="..." />
+                                <hr>
+                            </p></div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image"><h4>
+
+                                <br />
+                               Etape 2
+                                <br />
+
+                            </h4></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4> </h4>
+                                    <h4 class="subheading">Informations sur votre entreprise</h4>
+                            </div>
+                            <div class="timeline-body"><p class="text-muted">Après avoir rempli le formulaire d'inscription, un second formulaire s'affichera.
+Remplissez ce formulaire avec les informations de votre entreprise (nom de l'entreprise, adresse, numéro de téléphone, etc.).
+Vérifiez bien toutes les informations fournies avant de les soumettre.</p>
+                                <img class=" h-100 w-100  img-fluid" src="{% static 'et2.png' %}" alt="..." /><hr>
+                                <p class="text-muted">Une fois que vous avez terminé de remplir tous les formulaires, notez votre identifiant (adresse e-mail) et le mot de passe que vous avez choisis. Cela vous permettra de vous connecter ultérieurement.
+Vous recevrez également un message indiquant que vos informations ont été ajoutées avec succès.
+Consultez votre e-mail pour une confirmation de votre inscription. Si vous ne recevez pas cet e-mail, vérifiez votre dossier de spam.</p>
+
+
+</div>
+                        </div>
+                    </li>
+
+                    <li >
+                        <div class="timeline-image"><h4>
+
+                                <br />
+                               Etape 3
+                                <br />
+
+                            </h4></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4></h4>
+                                <h4 class="subheading">Postuler pour un marché
+</h4>
+                            </div>
+                            <div class="timeline-body"><p class="text-muted">
+    Après vous être inscrit(e), accédez à l'accueil et vous verrez la section des marchés publics.
+Recherchez le marché xxxxxx pour lequel vous souhaitez postuler.
+                                Cliquez sur "Postuler" pour ce marché.</p>
+                    <img class=" h-100 w-100  img-fluid" src="{% static 'et3.png' %}" alt="..." /><hr>
+
+
+
+                           <p class="text-muted"> Suivez les instructions pour téléverser les documents demandés.
+Une fois les documents sont téléversés, cliquez sur "Je postule" pour valider votre candidature. </p>
+ <hr>
+                                <img class=" h-100 w-100  img-fluid" src="{% static 'et4.png' %}" alt="..." />
+
+                                <hr>
+                                <p class="text-muted"> Après la soumission, Vérifiez vos e-mails pour une confirmation de votre candidature.
+                                    Assurez-vous que vous avez bien reçu une confirmation pour valider que votre candidature a été soumise avec succès.</p>
+
+                            </div>
+                        </div>
+                    </li>
+                     <li class="timeline-inverted">
+                        <div class="timeline-image"><h4>
+
+                                <br />
+                               Etape 4
+                                <br />
+
+                            </h4></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4> </h4>
+                                    <h4 class="subheading">Voir L'etat de vos candidatures</h4>
+                            </div>
+                            <div class="timeline-body"><p class="text-muted">Cliquer sur l'onglet (mes candidatures) pour voir l'evolution de vos candidatures
+                            </p>
+                                <img class=" h-100 w-100  img-fluid" src="{% static 'et5.png' %}" alt="..." /><hr>
+                                <img class=" h-100 w-100  img-fluid" src="{% static 'et6.png' %}" alt="..." />
+                                <h4 class="subheading">Conseil Supplementaire </h4>
+                                <p class="text-muted">
+                                    Notez bien votre mot de passe lors de la création de votre compte.
+Assurez-vous que tous les documents nécessaires sont prêts avant de commencer le processus de candidature.
+Si vous avez des questions ou des problèmes, consultez la section guide de la plateforme ou contactez le support technique.
+En suivant ces étapes, vous devriez être en mesure de vous inscrire, de renseigner les informations sur votre entreprise, de postuler pour un marché et de vérifier vos candidatures sans difficulté
+                                </p>
+
+
+</div>
+                        </div>
+                    </li>
+
+
+                    <li class="timeline-inverted">
+                        <div class="timeline-image">
+                            <h4>
+
+                                <br />
+                              MERCI !!!
+                                <br />
+
+                            </h4>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+{% endblock%}

@@ -11,6 +11,7 @@ urlpatterns = [
     path('ma_candidature', ma_candidature, name='candidature'),
     path('inscription', inscription, name='inscription'),
     path('apropos', apropos, name='apropos'),
+    path('guide', guide, name='guide'),
     path('postuler/<str:id>', postuler, name='postuler'),
     path('reset_password', views.PasswordResetView.as_view(template_name='blog/password_reset.html'),
          name='reset_password'),
