@@ -59,9 +59,12 @@ def _changement_template(request, template_name):
         code1 = request.POST.get("code1")
         code2 = request.POST.get("code2")
         offre_code = request.POST.get("offre_code")
+
         if code1 and code2:
             try:
-                Employeur.objects.get(utilisateur=request.user, code1=code1, code2=code2)
+                employeur = Employeur.objects.get(utilisateur=request.user, code1=code1, code2=code2)
+                employeur.active_offre = offre_code
+                employeur.save()
                 messages.success(request, "Déverrouillage effectué avec succès")
                 return redirect(f"offre_par_marche_public/{offre_code}")
             except Employeur.DoesNotExist:

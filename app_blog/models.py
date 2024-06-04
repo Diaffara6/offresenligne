@@ -22,7 +22,7 @@ class Entreprise(models.Model):
 
 
 class Marche_public(models.Model):
-    code = models.CharField(max_length=300, verbose_name="code de l'offre", primary_key=True)
+    code = models.CharField(max_length=50, verbose_name="code de l'offre", primary_key=True)
     description = models.TextField()
     status = models.BooleanField(default=True)
     pays = models.CharField(max_length=20, default="Burkina Faso")

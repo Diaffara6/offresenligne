@@ -10,8 +10,7 @@ class Employeur(models.Model):
     email2 = models.CharField(max_length=100, blank=True)
     code1 = models.CharField(max_length=16, blank=True)
     code2 = models.CharField(max_length=16, blank=True)
-
-
+    active_offre = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
         return self.utilisateur.username

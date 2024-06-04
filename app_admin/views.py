@@ -212,8 +212,11 @@ def candidatures(request):
     offres = Marche_public.objects.all().order_by('-date_pub')
     if offres:
         for offre in offres:
-            offre.status = compare_date_heure(offre)
-            offre.save()
+            if offre.employe:
+                employeur = Employeur.objects.get(utilisateur=offre.employe)
+                if employeur.active_offre == offre.code:
+                    offre.status = False
+                    offre.save()
             offre.nombre_candidatures = Candidature.objects.filter(offre=offre).count()
         page = request.GET.get('page', 1)
         paginator = Paginator(offres, 6)  # Afficher 6 marche publics
