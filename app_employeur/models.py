@@ -8,6 +8,8 @@ class Employeur(models.Model):
     fonction2 = models.CharField(max_length=40, blank=True)
     email1 = models.CharField(max_length=100, blank=True)
     email2 = models.CharField(max_length=100, blank=True)
+    nom1 = models.CharField(max_length=100, blank=True)
+    nom2 = models.CharField(max_length=100, blank=True)
     code1 = models.CharField(max_length=16, blank=True)
     code2 = models.CharField(max_length=16, blank=True)
     active_offre = models.CharField(max_length=50, blank=True, null=True)

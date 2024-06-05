@@ -59,7 +59,7 @@ def format_date(date_string):
     return formatted_date
 
 
-def send_mail_to_employers(username, password, email, code1='', code2=''):
+def send_mail_to_employers(username,nom, password, email, code1='', code2=''):
     info = f"""
 ------------
 {code1}
@@ -70,7 +70,7 @@ Vous avez été designé comme le 1er employé """ if code1 else f"""
 ------------
 Vous avez été designé comme le 2em employé"""
     message = f"""
-Bonjour/Bonsoir,
+Bonjour/Bonsoir, {nom}
 
 Félicitations ! Vous avez été ajouté en tant qu'employé avec succès.
 
@@ -105,7 +105,7 @@ L'équipe d'ENABEL-BURKINA FASO
         print("Contenu HTML invalide")
 
 
-def send_mail_to_employers_affectation(date, email, marche, code1='', code2=''):
+def send_mail_to_employers_affectation(date,nom, email, marche, code1='', code2=''):
     date = format_date(date)
     info = f"""{code1}
         Vous avez été designé comme le 1er employé """ if code1 else f"""{code2}
@@ -114,7 +114,7 @@ def send_mail_to_employers_affectation(date, email, marche, code1='', code2=''):
     <html>
     <head></head>
     <body>
-        <p>Bonjour/Bonsoir,</p>
+        <p>Bonjour/Bonsoir, {nom}</p>
 
         <p>Félicitations ! Le marché public dont la réference est : {marche} vous a été affecté pour son évaluation 
         jusqu'au {date}</p> 
@@ -434,6 +434,8 @@ def ajouter_employeur(request):
     fonction2 = ''
     email1 = ''
     email2 = ''
+    nom1 = ''
+    nom2 = ''
     password = ''
     password1 = ''
     context = {}
@@ -441,15 +443,17 @@ def ajouter_employeur(request):
         username = request.POST["username"]
         fonction1 = request.POST["fonction1"]
         fonction2 = request.POST["fonction2"]
+        nom1 = request.POST["nom1"]
+        nom2 = request.POST["nom2"]
         password = request.POST["password"]
         password1 = request.POST["password1"]
         code1 = ''.join(random.choices('0123456789', k=6))
         code2 = ''.join(random.choices('0123456789', k=6))
         email1 = request.POST["email1"]
         email2 = request.POST["email2"]
-        if username and password and password1 and code1 and code2:
+        if username and password and password1 and code1 and code2 and nom1 and nom2:
             if User.objects.filter(username=username).exists():
-                messages.error(request, "ce nom d'utilisateur a deja été utilisé ")
+                messages.error(request, "ce  Numero de marché existe deja pour un autre employé ")
             elif password != password1:
                 messages.error(request, "vos mots de passes ne correspondent pas ")
             elif len(password) < 6:
@@ -461,11 +465,11 @@ def ajouter_employeur(request):
             else:
                 user = User.objects.create_user(username=username, password=password)
                 Employeur.objects.create(utilisateur=user, fonction1=fonction1, fonction2=fonction2, code1=code1,
-                                         code2=code2, email1=email1, email2=email2)
+                                         code2=code2, nom1=nom1, nom2=nom2, email1=email1, email2=email2)
                 if user:
                     messages.success(request, "Groupe d'employé ajouté avec succès ")
-                    send_mail_to_employers(username=username, password=password, email=email1, code1=code1)
-                    send_mail_to_employers(username=username, password=password, email=email2, code2=code2)
+                    send_mail_to_employers(username=username, nom=nom1, password=password, email=email1, code1=code1)
+                    send_mail_to_employers(username=username, nom=nom2, password=password, email=email2, code2=code2)
                     return redirect("employeurs")
         else:
             messages.error(request, "Remplissez correctement tous les champs")
@@ -476,7 +480,10 @@ def ajouter_employeur(request):
                    'password': password,
                    'password1': password1,
                    'email1': email1,
-                   'email2': email2, }
+                   'email2': email2,
+                   'nom1': nom1,
+                   'nom2': nom2,
+                   }
     return render(request, template_name="app_admin/ajouter_employeur.html", context=context)
 
 
@@ -489,6 +496,8 @@ def modifier_employeur(request, id):
         username = request.POST.get("username")
         fonction1 = request.POST.get("fonction1")
         fonction2 = request.POST.get("fonction2")
+        nom1 = request.POST.get("nom1")
+        nom2 = request.POST.get("nom2")
         password = request.POST.get("password")
         password1 = request.POST.get("password1")
         email1 = request.POST["email1"]
@@ -535,10 +544,16 @@ def modifier_employeur(request, id):
         if code2:
             e.code2 = code2
             e.save()
+        if nom2:
+            e.nom2 = nom2
+            e.save()
+        if nom1:
+            e.nom1 = nom1
+            e.save()
 
         messages.error(request, "modification effectuée avec succès.")
-        send_mail_to_employers(username=e.utilisateur.username, password=password, email=email1 if email1 else e.email1, code1=code1)
-        send_mail_to_employers(username=e.utilisateur.username, password=password, email=email2  if email2 else e.email2, code2=code2)
+        send_mail_to_employers(username=e.utilisateur.username,nom=nom1, password=password, email=email1 if email1 else e.email1, code1=code1)
+        send_mail_to_employers(username=e.utilisateur.username,nom=nom2, password=password, email=email2 if email2 else e.email2, code2=code2)
         return redirect("employeurs")
 
     context = {

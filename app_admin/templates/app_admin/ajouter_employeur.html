@@ -49,6 +49,15 @@
                             <label for="password1">Confirmez le mot de passe</label><br>
                             <input type="password" class="form-control" name="password1" id="password1"  value="{% if password1 %}{{password1}}{% endif %}">
                           </div>
+                            <h4 class="text-center">Le nom des employés</h4><br>
+                            <div class="form-group">
+                            <label for="nom1">nom complet du 1er employé</label>
+                            <input type="text" class="form-control" id="nom1" name="nom1" value="{% if nom1 %}{{nom1}}{%else%}{{e.nom1}}{% endif %}">
+                          </div>
+                          <div class="form-group">
+                            <label for="nom2">nom complet du 2em employé</label>
+                            <input type="text" class="form-control" id="nom2" name="nom2" value="{% if nom2 %}{{nom2}}{%else%}{{e.nom2}}{% endif %}">
+                          </div>
                           <h4 class="text-center">La fonction des employés</h4><br>
 
                           <div class="form-group">
@@ -59,6 +68,8 @@
                             <label for="fonction2">Fonction du 2eme employé</label>
                             <input type="text" class="form-control" id="fonction2" name="fonction2" value="{% if fonction2 %}{{fonction2}}{%else%}{{e.fonction2}}{% endif %}">
                           </div>
+
+
 
                             <h4 class="text-center">L'adresse email des employés </h4>
                           <div class=""><br>

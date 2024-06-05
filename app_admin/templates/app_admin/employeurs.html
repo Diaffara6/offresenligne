@@ -39,12 +39,10 @@
                             <thead>
                                 <tr>
                                 <th>Numero du marché</th>
+                                <th>nom du 1er employé</th>
+                                <th>nom du 2em employé</th>
                                 <th>Fonction du 1er employé</th>
                                 <th>Fonction du 2er employé</th>
-                                <th>Mot de passes</th>
-                                <th>code du  1er employé</th>
-                                <th>code du  2eme employé</th>
-                                <th>Dates D'ajout</th>
                                 <th>Actions</th>
                                 </tr>
                             </thead>
@@ -52,12 +50,11 @@
                                 {% for employeur in employeurs %}
                                 <tr>
                                     <td>{{ employeur.utilisateur.username }}</td>
+                                    <td>{{ employeur.nom1 }}</td>
+                                    <td>{{ employeur.nom2 }}</td>
                                     <td>{{ employeur.fonction1 }}</td>
                                     <td>{{ employeur.fonction2 }}</td>
-                                    <td>******</td>
-                                    <td>******</td>
-                                    <td>******</td>
-                                    <td>{{ employeur.utilisateur.date_joined }}</td>
+
                                     <td>
                                         <div class="table-data-feature">
 
