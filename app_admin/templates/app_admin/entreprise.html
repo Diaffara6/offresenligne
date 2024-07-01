@@ -39,7 +39,7 @@
                                     <td>{{ entreprise.nom_entrep }}</td>
                                     <td>{{ entreprise.email_entrep }}</td>
                                     <td>{% if entreprise.immatriculation %}{{ entreprise.immatriculation }} {% else %} vide {% endif %}</td>
-                                    <td>{% if entreprise.activite %}{{ entreprise.activite }}{% elif entreprise.secteur %} {{ entreprise.secteur }} {% else %} {{ entreprise.activite }} {% endif %}</td>
+                                    <td>{% if entreprise.activite %}{{ entreprise.activite|slice:":70" }}...{% else %} {{ entreprise.secteur|slice:":70" }}... {% endif %} </td>
                                     <td>{{ entreprise.idtel }} {{ entreprise.telephone }}</td>
                                     <td>{{ entreprise.adresse_entrep }}</td>
                                     <td>{{ entreprise.date }}</td>
@@ -70,7 +70,7 @@
                         </span>
                     {% endif %}
                 </li>
-        
+
                 {% for num_page in entreprises.paginator.page_range %}
                     <li class="page-item mx-1">
                         {% if entreprises.number == num_page %}
@@ -84,7 +84,7 @@
                         {% endif %}
                     </li>
                 {% endfor %}
-        
+
                 <li class="page-item mx-1">
                     {% if entreprises.has_next %}
                         <a class="page-link px-3 py-2 border border-primary rounded-full text-primary" href="?page={{ entreprises.next_page_number }}">
@@ -98,7 +98,7 @@
                 </li>
             </ul>
           {% endif %}
-        
+
 
         </div>
     </div>

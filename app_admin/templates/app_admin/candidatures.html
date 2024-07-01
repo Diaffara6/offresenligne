@@ -26,7 +26,7 @@
             </div>
             <!-- La liste des cadidatures en fonction des offres -->
             <h2 class="text-center text-light pt-3 pb-3 " style="background-color: #337ab7; color:#fff;">Les Marchés publics </h2>
-             
+
             {% if messages %}
             <div class="m-9 alert alert-success alert-dismissible fade show" role="alert">
                 <ul>
@@ -35,25 +35,25 @@
                 {% endfor %}
                 </ul>
                 <button type="button" class="close" data-dismiss="alert"> <span>&times;</span> </button>
-            
+
             </div>
-            
-            
+
+
             {% endif %}
 
             <div class="row m-t-30">
                 <div class="col-md-12  row mx-1 ">
                     <!-- DATA TABLE-->
-                     
-                         
-            
+
+
+
                 {% for offre in offres %}
-                
+
                 <div class="card text-center col-12 col-md-6 col-lg-4  pb-2 mt-1 mb-1  ">
-                    {% if not offre.status %}
+                    {% if offre.ouvert %}
                     <a href="{% url 'candidature_par_offre' offre.code %}">
                     <div class="card-body">
-                        
+
                         <h5 class="card-title">{{offre.code}}</h5>
                         <p class="card-text">{{offre.description|slice:":30"}}...</p>
                         <p class="card-text text-success">Vous pouvez maintenant voir les offres de ce marché public</p>
@@ -63,31 +63,31 @@
                 </a>
                  {% else %}
                 <div class="card-body">
-                        
+
                     <h5 class="card-title">{{offre.code}}</h5>
                     <p class="card-text">{{offre.description|slice:":30"}}...</p>
                     <p class="card-text text-danger">Patientez jusqu'a l'ouverture des offres par les employés affectés</p>
                     <p class="card-text text-success text-dark">Offre = {{offre.nombre_candidatures}} </p>
 
-                    
+
                 </div>
-                
-           
-              
-       
+
+
+
+
                 {% endif %}
                 <a href="{% url 'affecte_employe_marche_public' offre.pk %}"><button class="btn btn-success col-12 col-md-12 col-lg-12"> Affectez un employé </button></a>
-                
-               
+
+
                 </div>
-                {%empty%}
-                    <h2 class="text-center"> Marché public vide  </h2>
+     {%empty%}
+                    <h2 class="text-center mx-auto"> Marché public vide  </h2>
                     <br>
-           
+
                 {% endfor %}
-          
-       
-            
+
+
+
                 <!-- END DATA TABLE-->
             </div>
         </div>
@@ -132,7 +132,7 @@
             {% endif %}
         </li>
     </ul>
-  {% endif %}  
+  {% endif %}
 
         </div>
     </div>

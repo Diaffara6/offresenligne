@@ -20,14 +20,9 @@ from django.conf.urls.static import static
 from param_blog import settings
 
 urlpatterns = [
-    #path('secureadmin/', admin.site.urls),
-    #path('', include('app_blog.urls')),
-    #path('cellulemarchepublic/', include('app_employeur.urls')),
-    #path('guimarchepublic/', include('app_admin.urls')),
-
-    path('admin/', admin.site.urls),
+    path('secure_adminburkina/', admin.site.urls),
     path('', include('app_blog.urls')),
-    path('employe/', include('app_employeur.urls')),
-    path('sadmin/', include('app_admin.urls')),
+    path('cellulemarchespublics_log/', include('app_employeur.urls')),
+    path('enabeladmin/', include('app_admin.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

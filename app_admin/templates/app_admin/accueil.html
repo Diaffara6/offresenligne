@@ -36,7 +36,17 @@
         <div class="main-content">
             <div class="section__content section__content--p30">
                 <div class="container-fluid">
-                  
+{% if messages %}
+<div class="alert {% if 'error' in message.tags %}alert-danger{% else %}alert-success{% endif %} alert-dismissible fade show" role="alert">
+    <div style="list-style-type: none;"> <!-- Enlever les puces -->
+        {% for message in messages %}
+            <div class="text-center">{% if message.tags %}{{ message }}{% endif %}</div>
+        {% endfor %}
+    </div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+{% endif %}
                     <div class="row custom-grid">
                         <div class="col-sm-6 col-lg-3 col-md-6">
                             <!-- le lien pour les candidatures-->
@@ -123,13 +133,13 @@
                             </a>
                         </div>
                     </div>
-                    
-                   
+
+
 
 
                     <!-- Quelques Entreprises -->
                     <h1 class="text-center text-light pt-3 pb-3" style="background-color: #337ab7; color:#fff;">Quelques Entreprises </h1>
-                    
+
                     <div class="row m-t-30">
                         <div class="col-md-12">
                             <!-- DATA TABLE-->
@@ -143,7 +153,7 @@
                                         <th>Telephone(s)</th>
                                         <th>Immatriculation</th>
                                         <th>Activités</th>
-                                       
+
                                         <th>Emails</th>
                                         <th>Adresses</th>
                                         <th>Date D'ajout</th>
@@ -158,22 +168,22 @@
                                             <td>{{ entreprise.idtel }} {{ entreprise.telephone }}</td>
 
                                             <td>{% if entreprise.immatriculation %}{{ entreprise.immatriculation }} {% else %} vide {% endif %}</td>
-                                            <td>{{ entreprise.activite }}</td>
+                                            <td>{% if entreprise.activite %}{{ entreprise.activite|slice:":70" }}...{% else %} {{ entreprise.secteur|slice:":70" }}.. {% endif %}</td>
                                             <td>{{ entreprise.email_entrep }}</td>
                                             <td>{{ entreprise.adresse_entrep }}</td>
                                             <td>{{ entreprise.date }}</td>
                                         </tr>
                                         {% endfor %}
                                     </tbody>
-                                
+
                             </table>
                         </div>
                         <!-- END DATA TABLE-->
-                    
 
 
 
-                  
+
+
                 </div>
             </div>
         </div>
@@ -186,4 +196,3 @@
 
 
 {% endblock %}
-    

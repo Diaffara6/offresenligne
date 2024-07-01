@@ -52,7 +52,7 @@ def send_email(sujet, contenue, destinataire:list):
                 '',
                 from_email,
                 to_email,
-                html_message=contenue  
+                html_message=contenue
             )
         except Exception as e:
             print(f"Erreur lors de l'envoi de l'email : {e}")
@@ -303,7 +303,7 @@ def postuler(request, id):
 
         context = {'offre': offre}
     else:
-        context = {'message': 'Veuillez vous connectés pour pouvoir postuler.'}
+        context = {'message': 'Veuillez vous connecter pour pouvoir postuler.'}
 
     return render(request=request, template_name='blog/postuler.html', context=context)
 

@@ -9,7 +9,7 @@ from django.contrib import messages
 from app_blog.models import *
 from django.contrib.auth.hashers import make_password
 from django.shortcuts import render, redirect, get_object_or_404
-from datetime import datetime, date, time
+from datetime import datetime, date
 from django.contrib.auth.decorators import user_passes_test
 from django.core.mail import send_mail
 from django.utils.html import format_html
@@ -59,7 +59,7 @@ def format_date(date_string):
     return formatted_date
 
 
-def send_mail_to_employers(username,nom, password, email, code1='', code2=''):
+def send_mail_to_employers(username, password, email, code1='', code2=''):
     info = f"""
 ------------
 {code1}
@@ -70,7 +70,7 @@ Vous avez été designé comme le 1er employé """ if code1 else f"""
 ------------
 Vous avez été designé comme le 2em employé"""
     message = f"""
-Bonjour/Bonsoir, {nom}
+Bonjour/Bonsoir,
 
 Félicitations ! Vous avez été ajouté en tant qu'employé avec succès.
 
@@ -84,7 +84,7 @@ Voici votre code de deverouillage :
 {info}
 NB: le code de deverouillage est confidentiel
 
-{BASE_URL}/employe
+{BASE_URL}/cellulemarchespublics_log
 
 Cordialement,
 L'équipe d'ENABEL-BURKINA FASO
@@ -105,7 +105,7 @@ L'équipe d'ENABEL-BURKINA FASO
         print("Contenu HTML invalide")
 
 
-def send_mail_to_employers_affectation(date,nom, email, marche, code1='', code2=''):
+def send_mail_to_employers_affectation(date, email, marche, code1='', code2=''):
     date = format_date(date)
     info = f"""{code1}
         Vous avez été designé comme le 1er employé """ if code1 else f"""{code2}
@@ -114,11 +114,11 @@ def send_mail_to_employers_affectation(date,nom, email, marche, code1='', code2=
     <html>
     <head></head>
     <body>
-        <p>Bonjour/Bonsoir, {nom}</p>
+        <p>Bonjour/Bonsoir, </p>
 
-        <p>Félicitations ! Le marché public dont la réference est : {marche} vous a été affecté pour son évaluation 
-        jusqu'au {date}</p> 
-        
+        <p>Félicitations ! Le marché public dont la réference est : {marche} vous a été affecté pour son évaluation
+        jusqu'au {date}</p>
+
         <p>Rappel : <p>
         <p>Voici votre code de déverrouillage :</p>
         ---------------------------------
@@ -126,15 +126,15 @@ def send_mail_to_employers_affectation(date,nom, email, marche, code1='', code2=
         ---------------------------------
         <p>NB: le code de déverrouillage est confidentiel</p>
 
-         <p>{BASE_URL}/employe</p>
+         <p>{BASE_URL}/cellulemarchespublics_log</p>
 
         <p>Cordialement,<br>
         L'équipe d'ENABEL-BURKINA FASO</p>
-       
+
     </body>
     </html>
     """
-  
+
     try:
         send_mail(
             subject="Affectation à un marché public",
@@ -143,9 +143,49 @@ def send_mail_to_employers_affectation(date,nom, email, marche, code1='', code2=
             from_email=settings.EMAIL_HOST_USER,
             recipient_list=[email]
         )
-        
+
     except Exception as e:
         print(f"Erreur lors de l'envoi de l'email : {e}")
+
+
+
+def send_mail_to_admin_affectation(nom,prenom,username,password,email):
+    message = f"""
+    <html>
+    <head></head>
+    <body>
+        <p>Bonjour/Bonsoir, {nom} {prenom} </p>
+
+        <p>Félicitations ! Vous avez été ajouté en tant qu'administrateur pour la gestion de notre plateforme.</p>
+
+        <p>Voici vos informations de connexion : </p>
+        ---------------------------------
+        <p>Nom d'utilisateur : {username}</p>
+        <p>Mot de passe : {password}</p>
+        ---------------------------------
+        <p>NB: Nous vous recommandons de changer votre mot de passe lors de votre première connexion pour des raisons de sécurité</p>
+        <p>Pour accéder à l'interface administrateur, veuillez cliquer ici : {BASE_URL}/enabeladmin </p>
+        <p>Si vous avez des questions ou rencontrez des difficultés, n'hésitez pas à nous contacter. </p>
+
+        <p>Cordialement,<br>
+        L'équipe d'ENABEL-BURKINA FASO</p>
+
+    </body>
+    </html>
+    """
+
+    try:
+        send_mail(
+            subject="Ajout en tant qu'Administrateur de la Plateforme d'ENABEL BURKINA",
+            message='',
+            html_message=message,
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[email]
+        )
+
+    except Exception as e:
+        print(f"Erreur lors de l'envoi de l'email : {e}")
+
 
 
 def connexion(request):
@@ -199,7 +239,6 @@ def accueil(request):
         for offre in les_offres:
             offre.status = compare_date_heure(offre)
             offre.save()
-
     les_employeurs = Employeur.objects.all()
     context = {"les_candidatures": les_candidatures, "les_entreprises": les_entreprises, "entreprises": entreprises,
                "les_offres": les_offres, "les_employeurs": les_employeurs}
@@ -208,14 +247,14 @@ def accueil(request):
 
 @user_passes_test(is_superuser, login_url="Aconnexion")
 def candidatures(request):
-  
+
     offres = Marche_public.objects.all().order_by('-date_pub')
     if offres:
         for offre in offres:
             if offre.employe:
                 employeur = Employeur.objects.get(utilisateur=offre.employe)
                 if employeur.active_offre == offre.code:
-                    offre.status = False
+                    offre.ouvert = True
                     offre.save()
             offre.nombre_candidatures = Candidature.objects.filter(offre=offre).count()
         page = request.GET.get('page', 1)
@@ -370,7 +409,7 @@ def ajouter_offre(request):
                             return redirect(request.META.get('HTTP_REFERER'))
 
                 offre.save()
-                messages.success(request, "ajout effectué avec succes")
+                messages.success(request, "Publication effectuée avec succes")
                 return redirect("offres")
         else:
             messages.error(request, "aucun de ces trois(3) champs ne doit être vide (code, date limite et l'heure) ")
@@ -451,7 +490,7 @@ def ajouter_employeur(request):
         code2 = ''.join(random.choices('0123456789', k=6))
         email1 = request.POST["email1"]
         email2 = request.POST["email2"]
-        if username and password and password1 and code1 and code2 and nom1 and nom2:
+        if username and password and password1 and code1 and code2 and nom1 and nom2 and fonction1 and fonction2:
             if User.objects.filter(username=username).exists():
                 messages.error(request, "ce  Numero de marché existe deja pour un autre employé ")
             elif password != password1:
@@ -468,8 +507,8 @@ def ajouter_employeur(request):
                                          code2=code2, nom1=nom1, nom2=nom2, email1=email1, email2=email2)
                 if user:
                     messages.success(request, "Groupe d'employé ajouté avec succès ")
-                    send_mail_to_employers(username=username, nom=nom1, password=password, email=email1, code1=code1)
-                    send_mail_to_employers(username=username, nom=nom2, password=password, email=email2, code2=code2)
+                    send_mail_to_employers(username=username, password=password, email=email1, code1=code1)
+                    send_mail_to_employers(username=username, password=password, email=email2, code2=code2)
                     return redirect("employeurs")
         else:
             messages.error(request, "Remplissez correctement tous les champs")
@@ -511,7 +550,7 @@ def modifier_employeur(request, id):
         else:
             messages.error(request, "cet Numero de marché existe deja pour un employé .")
             return redirect(request.META.get('HTTP_REFERER'))
-        
+
         if password and password1:
             if password != password1:
                 messages.error(request, "Vos mots de passe ne correspondent pas.")
@@ -523,7 +562,10 @@ def modifier_employeur(request, id):
                 hashed_password = make_password(password)
                 user.password = hashed_password
                 user.save()
-        
+        else:
+            messages.error(request, "Ajouter un mot de passe.")
+            return redirect(request.META.get('HTTP_REFERER'))
+
 
 
         if fonction1:
@@ -552,8 +594,8 @@ def modifier_employeur(request, id):
             e.save()
 
         messages.error(request, "modification effectuée avec succès.")
-        send_mail_to_employers(username=e.utilisateur.username,nom=nom1, password=password, email=email1 if email1 else e.email1, code1=code1)
-        send_mail_to_employers(username=e.utilisateur.username,nom=nom2, password=password, email=email2 if email2 else e.email2, code2=code2)
+        send_mail_to_employers(username=e.utilisateur.username, password=password, email=email1 if email1 else e.email1, code1=code1)
+        send_mail_to_employers(username=e.utilisateur.username, password=password, email=email2 if email2 else e.email2, code2=code2)
         return redirect("employeurs")
 
     context = {
@@ -643,6 +685,7 @@ def ajouter_admin(request):
                     user.is_staff = False
                     user.save()
                 if user:
+                    send_mail_to_admin_affectation(nom=nom,prenom=prenom,username=username,password=password,email=email)
                     messages.success(request, "Administrateur créé avec succès.")
                     return redirect("admins")
                 else:
@@ -678,6 +721,8 @@ def admins(request):
 @user_passes_test(is_superuser, login_url="Aconnexion")
 def modifier_admin(request, id):
     user = get_object_or_404(User, pk=id)
+    if not request.user.is_staff and user != request.user:
+        return redirect('accueil')
     if request.method == "POST":
         nom = request.POST.get("nom")
         equipe = request.POST.get("equipe")
@@ -685,15 +730,7 @@ def modifier_admin(request, id):
         email = request.POST.get("email")
         password = request.POST.get("password")
         password1 = request.POST.get("password1")
-        if password and password1:
-            if password != password1:
-                messages.error(request, "vos mots de passes ne correspondent pas ")
-            elif len(password) < 6:
-                messages.error(request, "votre mot de passe doit avoir au moins 6 caracteres ")
-            else:
-                hashed_password = make_password(password)
-                user.password = hashed_password
-                user.save()
+
         if nom:
             user.last_name = nom
             user.save()
@@ -709,8 +746,29 @@ def modifier_admin(request, id):
         if email:
             user.email = email
             user.save()
-        messages.success(request, "modification effectuée avec succès ")
-        return redirect("admins")
+        if password and password1:
+            if password != password1:
+                messages.error(request, "vos mots de passes ne correspondent pas ")
+                return redirect(request.META.get('HTTP_REFERER'))
+            elif len(password) < 6:
+                messages.error(request, "votre mot de passe doit avoir au moins 6 caracteres ")
+                return redirect(request.META.get('HTTP_REFERER'))
+            else:
+                hashed_password = make_password(password)
+                user.password = hashed_password
+                user.save()
+
+
+        if request.user == user:
+            messages.success(request, "Vos informations on été modifiées avec succès")
+            login(request, user=user)
+            return redirect('Aconnexion')
+        if request.user.is_staff:
+            messages.success(request, "modification effectuée avec succès ")
+            return redirect("admins")
+        else:
+            messages.success(request, "modification effectuée avec succès ")
+            return redirect("accueil")
     context = {
         'utilisateur': user,
         'modif': 'modification',

@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-f8@64h&(%$(8!#h+6!pjy5%@%-)=evtq-76y^d0s3@#u_1kyg4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['www.offresenligne.com','offresenligne.com','127.0.0.1']
+ALLOWED_HOSTS = ['www.bfaoffresenligne.com','bfaoffresenligne.com']
 
 
 # Application definition
@@ -132,14 +132,21 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtpout.secureserver.net'
+"""
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+EMAIL_USE_TLS = False  # Utilisez soit SSL soit TLS, mais pas les deux
+EMAIL_HOST_USER = 'contact@bfaoffresenligne.com'
+EMAIL_HOST_PASSWORD = "#Enabel@+226burkina#"
+"""
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "offres.enlignes@gmail.com"
 EMAIL_HOST_PASSWORD = "eensmdavzggzigvm"
-EMAIL_HOST_USER_SECONDARY = "contact@offresenligne.com"
-EMAIL_HOST_PASSWORD_SECONDARY = "psswd1234secure"
 
 
-BASE_URL = 'www.offresenligne.com'
+
+BASE_URL = 'www.bfaoffresenligne.com'

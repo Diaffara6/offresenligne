@@ -28,12 +28,12 @@
                         <form method="POST">
                             {% csrf_token %}
 
-                           
+
                           <div class="">
                             <label for="username">Numero du marché</label>
                             <input type="text" required class="form-control" id="username" name="username" value="{% if username %}{{username}}{%else%}{{utilisateur.username}}{% endif %}">
                           </div>
-                       
+
 
                           <div class=""><br>
 
@@ -51,11 +51,11 @@
                           </div>
                             <h4 class="text-center">Le nom des employés</h4><br>
                             <div class="form-group">
-                            <label for="nom1">nom complet du 1er employé</label>
+                            <label for="nom1">Nom complet du 1er employé</label>
                             <input type="text" class="form-control" id="nom1" name="nom1" value="{% if nom1 %}{{nom1}}{%else%}{{e.nom1}}{% endif %}">
                           </div>
                           <div class="form-group">
-                            <label for="nom2">nom complet du 2em employé</label>
+                            <label for="nom2">Nom complet du 2em employé</label>
                             <input type="text" class="form-control" id="nom2" name="nom2" value="{% if nom2 %}{{nom2}}{%else%}{{e.nom2}}{% endif %}">
                           </div>
                           <h4 class="text-center">La fonction des employés</h4><br>

@@ -10,8 +10,8 @@
             <div class="col-md-12">
                 <div class="overview-wrap mb-3">
                     <h2 class="title-3"><a href="{%url 'offres'%}"><- Marchés publics </a></h2>
-                   
-                    
+
+
                 </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
                         <h2 class="text-center mb-4">Publier un marché public</h2>
                         <form method="POST" enctype="multipart/form-data">
                             {% csrf_token %}
-            
+
                           <div class="form-group">
                             <label for="code">Numero du marché</label>
                             <input type="text" class="form-control" id="code" name="code" value="{% if code %}{{ code }}{% endif %}" required>
@@ -35,7 +35,7 @@
                           </div>
                           <div class="form-group">
                             <label for="pays">pays</label>
-                            <input type="text" class="form-control" id="pays" name="pays" value="{% if pays %}{{ pays }}{% endif %}">
+                            <input type="text" class="form-control" id="pays" name="pays" value="{% if pays %}{{ pays }}{% else %}Burkina Faso {% endif %}">
                           </div>
                           <div class="form-group">
                             <label for="date_limite">date limite</label>
@@ -56,13 +56,13 @@
                             <input type="file" class="form-control" name="doc3" id="doc3" value="{% if doc3 %}{{doc3}}{% endif %}"><br>
                             <input type="file" class="form-control" name="doc4" id="doc4" value="{% if doc4 %}{{doc4}}{% endif %}"><br>
                             <input type="file" class="form-control" name="doc5" id="doc5" value="{% if doc5 %}{{doc5}}{% endif %}"><br>
-                       
+
                           </div>
-                          
-                        
+
+
                           <input type="submit" class="btn btn-custom w-100 "   style="background-color:#337ab7; color: #fff;" value="Publier" >
-                       
-                          
+
+
                           {% if messages %}
             <div class="m-9 alert alert-danger alert-dismissible fade show" role="alert">
                 <ul>
@@ -71,21 +71,21 @@
                 {% endfor %}
                 </ul>
                 <button type="button" class="close" data-dismiss="alert"> <span>&times;</span> </button>
-            
+
             </div>
-            
-            
+
+
             {% endif %}
-            
+
                         </form>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            
-         
-            
+
+
+
         </div>
     </div>
 </div>

@@ -15,16 +15,16 @@
                 {% endfor %}
                 </ul>
                 <button type="button" class="close" data-dismiss="alert"> <span>&times;</span> </button>
-            
+
             </div>
              {% endif %}
             <div class="row">
                 <div class="col-md-12">
                     <div class="overview-wrap mb-3">
                         <h2 class="title-3"><a href="{%url 'accueil'%}"><- Accueil </a></h2>
-                        <a href="{%url 'ajouter_offre'%}"> 
+                        <a href="{%url 'ajouter_offre'%}">
                         <button class="au-btn au-btn-icon au-btn--blue">
-                            <i class="zmdi zmdi-plus"></i>Ajouter un marché public</button></a>
+                            <i class="zmdi zmdi-plus"></i>Publier un marché public</button></a>
                     </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                     text-overflow: ellipsis;
                 }
             </style>
-                               
+
             <div class="row m-t-30">
                 <div class="col-md-12">
                     <!-- DATA TABLE-->
@@ -62,29 +62,29 @@
                                     <td>{{ offre.description|slice:":70" }}...</td>
                                     <td>{{ offre.pays }}</td>
                                     {% if offre.status %} <td class="bg-success text-light ">Ouvert </td>{% else %} <td class="bg-danger text-light ">Fermé </td>{% endif %}
-                                    
+
                                     <td>{% if offre.doc1 %}<a href="{{ offre.doc1.url }}"> {{ offre.doc1|cut:"file/"  }}</a> {% endif %} <br>
                                          {% if offre.doc2 %}<a href="{{ offre.doc2.url }}"> {{ offre.doc2|cut:"file/"  }}</a> {% endif %}<br>
                                          {% if offre.doc3 %}<a href="{{ offre.doc3.url }}"> {{ offre.doc3|cut:"file/"  }}</a> {% endif %}<br>
                                          {% if offre.doc4 %}<a href="{{ offre.doc4.url }}"> {{ offre.doc4|cut:"file/"  }}</a> {% endif %}<br>
                                           {% if offre.doc5 %}<a href="{{ offre.doc5.url }}"> {{ offre.doc5|cut:"file/"  }}</a> {% endif %}<br></td>
-                                    
-                                    
+
+
                                     <td>{{ offre.date_limite }} a {{offre.heure_limite}}</td>
                                     <td>
                                         <div class="table-data-feature">
-                                            
+
                                             <a class="mr-1" href="{%url 'modifier_offre' offre.code%}"><button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="modifier">
-                                               <i class="zmdi zmdi-edit"></i> 
+                                               <i class="zmdi zmdi-edit"></i>
                                             </button></a>
 
                                             <a href="{%url 'supprimer_offre' offre.code%}"> <button onclick="return confirm('voulez-vous supprimer ce marché public ? ')" class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="supprimer">
                                                 <i class="zmdi zmdi-delete"></i>
                                             </button></a>
-                                        
+
                                         </div>
                                     </td>
-                                    
+
                                     </tr>
                                     {%empty%}
                                 <h2 class="text-center"> Aucun marché public n'a été enregistré pour le moment </h2>
@@ -97,7 +97,7 @@
                 </div>
             </div>
 
-            
+
         </div>
         <div class='mb-0'>
             {% if offres.has_previous or offres.has_next %}
@@ -113,7 +113,7 @@
                         </span>
                     {% endif %}
                 </li>
-        
+
                 {% for num_page in offres.paginator.page_range %}
                     <li class="page-item mx-1">
                         {% if offres.number == num_page %}
@@ -127,7 +127,7 @@
                         {% endif %}
                     </li>
                 {% endfor %}
-        
+
                 <li class="page-item mx-1">
                     {% if offres.has_next %}
                         <a class="page-link px-3 py-2 border border-primary rounded-full text-primary" href="?page={{ offres.next_page_number }}">
@@ -141,10 +141,9 @@
                 </li>
             </ul>
           {% endif %}
-        
-        
+
+
         </div>
     </div>
 </div>
   {% endblock %}
-    
