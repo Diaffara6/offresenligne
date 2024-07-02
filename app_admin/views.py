@@ -1,10 +1,7 @@
 import random
-from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
 from app_employeur.models import Employeur
-from django.urls import reverse
 from django.contrib import messages
 from app_blog.models import *
 from django.contrib.auth.hashers import make_password
@@ -12,12 +9,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime, date
 from django.contrib.auth.decorators import user_passes_test
 from django.core.mail import send_mail
-from django.utils.html import format_html
 from html.parser import HTMLParser
 from param_blog import settings
 from param_blog.settings import BASE_URL
-from django.contrib.auth.hashers import check_password
-from django.utils import formats
 import locale
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -84,10 +78,10 @@ Voici votre code de deverouillage :
 {info}
 NB: le code de deverouillage est confidentiel
 
-{BASE_URL}/cellulemarchespublics_log
+{BASE_URL}/cellulemarchepublic
 
 Cordialement,
-L'équipe d'ENABEL-BURKINA FASO
+L'équipe d'ENABEL-GUINEE
 
     """
     validator = HTMLValidator()
@@ -126,10 +120,10 @@ def send_mail_to_employers_affectation(date, email, marche, code1='', code2=''):
         ---------------------------------
         <p>NB: le code de déverrouillage est confidentiel</p>
 
-         <p>{BASE_URL}/cellulemarchespublics_log</p>
+         <p>{BASE_URL}/cellulemarchepublic</p>
 
         <p>Cordialement,<br>
-        L'équipe d'ENABEL-BURKINA FASO</p>
+        L'équipe d'ENABEL-GUINEE</p>
 
     </body>
     </html>
@@ -164,11 +158,11 @@ def send_mail_to_admin_affectation(nom,prenom,username,password,email):
         <p>Mot de passe : {password}</p>
         ---------------------------------
         <p>NB: Nous vous recommandons de changer votre mot de passe lors de votre première connexion pour des raisons de sécurité</p>
-        <p>Pour accéder à l'interface administrateur, veuillez cliquer ici : {BASE_URL}/enabeladmin </p>
+        <p>Pour accéder à l'interface administrateur, veuillez cliquer ici : {BASE_URL}/guimarchepublic </p>
         <p>Si vous avez des questions ou rencontrez des difficultés, n'hésitez pas à nous contacter. </p>
 
         <p>Cordialement,<br>
-        L'équipe d'ENABEL-BURKINA FASO</p>
+        L'équipe d'ENABEL-GUINEE</p>
 
     </body>
     </html>
@@ -176,7 +170,7 @@ def send_mail_to_admin_affectation(nom,prenom,username,password,email):
 
     try:
         send_mail(
-            subject="Ajout en tant qu'Administrateur de la Plateforme d'ENABEL BURKINA",
+            subject="Ajout en tant qu'Administrateur de la Plateforme d'ENABEL GUINEE",
             message='',
             html_message=message,
             from_email=settings.EMAIL_HOST_USER,
@@ -376,7 +370,7 @@ def ajouter_offre(request):
         description = request.POST['description']
         pays = request.POST['pays']
         if not pays:
-            pays = 'Burkina Faso'
+            pays = 'Guinée'
         date_limite = request.POST['date_limite']
         heure_limite = request.POST['heure_limite']
 

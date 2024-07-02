@@ -58,9 +58,10 @@
                                     <td>
                                         <div class="table-data-feature">
 
-                                            <a class="mr-1" href="{%url 'modifier_employeur' employeur.utilisateur.pk %}"><button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editer">
+                                            <a href="{%url 'modifier_employeur' employeur.utilisateur.pk %}"><button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editer">
                                               <i class="zmdi zmdi-edit"></i> 
                                             </button></a>
+
                                             {%if employeur.utilisateur.is_active %}
                                             <a href="{%url 'delete_employeur' employeur.utilisateur.pk %}"> <button onclick="return confirm('voulez-vous desactivé le compte de cet employé ? ')" class="item" data-toggle="tooltip" id="delete" data-placement="top" title="" data-original-title="Desactivé">
                                                   <i class="zmdi  zmdi-eye-off"></i>

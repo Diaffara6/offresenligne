@@ -148,7 +148,7 @@ def entreprise(request):
                             Téléphone : {}<br><br>
                             Merci de nous avoir choisis.<br><br>
                             Cordialement,<br>
-                            L'équipe d'ENABEL-BURKINA FASO
+                            L'équipe d'ENABEL-GUINEE
                             {}
                             </span>
                         """, request.user.first_name,request.user.last_name, nom_entrep, adresse_entrep, telephone, BASE_URL)
@@ -293,7 +293,7 @@ def postuler(request, id):
 
                     Merci de nous avoir choisis.<br><br>
                     Cordialement,<br>
-                    L'équipe d'ENABEL-BURKINA FASO
+                    L'équipe d'ENABEL-GUINEE
                     {}
                     </span>
                 """, request.user.first_name, request.user.last_name, offre.code, BASE_URL,BASE_URL)

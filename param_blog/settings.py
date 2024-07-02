@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-f8@64h&(%$(8!#h+6!pjy5%@%-)=evtq-76y^d0s3@#u_1kyg4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['www.bfaoffresenligne.com','bfaoffresenligne.com']
+ALLOWED_HOSTS = ["127.0.0.1",'www.offresenligne.com','offresenligne.com']
 
 
 # Application definition
@@ -149,4 +149,4 @@ EMAIL_HOST_PASSWORD = "eensmdavzggzigvm"
 
 
 
-BASE_URL = 'www.bfaoffresenligne.com'
+BASE_URL = 'www.offresenligne.com'
